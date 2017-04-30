@@ -7,13 +7,11 @@ class Topic {
     Date lastUpdated
     Visibility visibility
 
-    static belongsTo = [user:User]
+    static belongsTo = [createdBy:User]
     static hasMany = [subscriptions:Subscription , resources:Resource]
 
     static constraints = {
-        topicName nullable: false,blank: false
-        visibility nullable: false
-        createdBy nullable: false
+        topicName blank: false
         createdBy(unique: ['topicName'])
     }
 

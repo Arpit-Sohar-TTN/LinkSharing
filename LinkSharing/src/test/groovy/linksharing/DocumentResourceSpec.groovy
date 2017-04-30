@@ -8,15 +8,40 @@ import spock.lang.Specification
  */
 @TestFor(DocumentResource)
 class DocumentResourceSpec extends Specification {
+    def "validateDocumentResource"() {
+        given:
+        DocumentResource documentResource = new DocumentResource(filePath: filePath, description: description, createdBy: user, topic: topic)
 
-    def setup() {
+        when:
+        Boolean result = documentResource.validate()
+        then:
+        result == valid
+
+        where:
+        description   | filePath         | user       | topic       | valid
+        "description" | "/home/arpit" | new User() | new Topic() | true
+        ""            | "/home/arpit" | new User() | new Topic() | false
+        null          | "/home/arpit" | new User() | new Topic() | false
+        "description" | ""            | new User() | new Topic() | false
+        "description" | null          | new User() | new Topic() | false
+        "description" | "/home/arpit" | null       | new Topic() | false
+        "description" | "/home/arpit" | new User() | null        | false
     }
 
-    def cleanup() {
-    }
+    def "tostringCheck"() {
+        setup:
+        DocumentResource documentResource = new DocumentResource(filePath: filePath)
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        when:
+        result == documentResource.toString()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        filePath          | result
+        "/some/file/path" | "/some/file/path"
+        ""                | ""
+        null              | null
     }
 }

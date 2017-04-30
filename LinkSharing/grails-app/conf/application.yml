@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: linkSharing
+        defaultPackage: linksharing
     spring:
         transactionManagement:
             proxies: false
@@ -108,6 +108,8 @@ environments:
         dataSource:
             dbCreate: create
             url: jdbc:mysql://localhost:3306/LinkSharing
+
+
     test:
         dataSource:
             dbCreate: update

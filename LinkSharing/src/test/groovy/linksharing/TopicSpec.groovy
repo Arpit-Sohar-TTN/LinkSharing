@@ -1,43 +1,87 @@
 package linksharing
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 import spock.lang.Unroll
+import java.util.Date
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Topic)
+@Mock(User)
 class TopicSpec extends Specification {
 
-    def setup() {
-    }
 
-    def cleanup() {
-    }
-//
-//    void "test something"() {
-//        expect:"fix me"
-//            true == false
-//    }
-    @Unroll
-    void "Testing Topic"() {
-        setup:
-        Topic topic = new Topic(topicName: topicName,createdBy: createdBy,dateCreated: dateCreated,lastUpdated: lastUpdated,
-                        visibility: visibility)
-        boolean result = topic.validate()
+    @Unroll("Topic Constraints ----- #sno")
+    void  "testTopicValidations"() {
 
-        expect:
-        result == validate
+        given:
+        Topic topic = new Topic(topicName: topicName, createdBy: createdBy, visibility: visibility,
+                                dateCreated: dateCreated,
+                                lastUpdated: lastUpdated)
 
+        when:
+        Boolean result = topic.validate()
 
+        then:
+        result == valid
 
         where:
-        topicName   |   createdBy   |   dateCreated     |       lastUpdated     |       visibility          |   validate
-        "Grails"    |  new User()   |   new Date()      |   new Date()          |       Visibility.PUBLIC   |   true
-        ""          |   new User()  |   new Date()      |   new Date()          |       null                |   false
-
+        sno | topicName | createdBy  | visibility          |dateCreated    | lastUpdated  | valid
+        1   | " Grails" | new User() | Visibility.PRIVATE  |new Date()     | new Date()   | true
+        2   | " "       | new User() | Visibility.PRIVATE  |new Date()     | new Date()   | false
+        3   | null      | new User() | Visibility.PRIVATE  |new Date()     | new Date()   | false
+        4   | "grails"  | null       | Visibility.PUBLIC   |new Date()     | new Date()   | false
+        5   | "grails"  | new User() | null                |new Date()     | new Date()   | false
     }
 
+    def "topicUserUniqueness"() {
+
+        given:
+        String topicName = "grails"
+        User creator = new User()
+        Visibility visibility = Visibility.PRIVATE
+        Topic topic = new Topic(topicName: topicName, createdBy: creator,dateCreated: new Date(),
+                lastUpdated: new Date(), visibility: visibility)
+
+        when:
+        topic.save()
+
+        then:
+        println topic.errors
+        Topic.count() == 1
+
+
+        when:
+        Topic newTopic = new Topic(topicName: topicName, createdBy: creator,dateCreated: new Date(),
+                                    lastUpdated: new Date(), visibility: visibility)
+        newTopic.save()
+
+        then:
+        Topic.count() == 1
+        newTopic.errors.allErrors.size() == 1
+        println newTopic.errors
+        newTopic.errors.getFieldErrorCount('createdBy') == 1
+    }
+
+    def "Correct Topic" () {
+        given:
+        String topicName = "grails"
+        User creator = new User()
+        Visibility visibility = Visibility.PRIVATE
+        Topic topic = new Topic(topicName: topicName, createdBy: creator,dateCreated: new Date(),
+                lastUpdated: new Date(), visibility: visibility)
+
+
+        when:
+        creator.save()
+        topic.save()
+
+        then:
+        Topic.count == 1
+
+    }
 
 }

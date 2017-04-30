@@ -1,5 +1,6 @@
 package linksharing
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -9,14 +10,13 @@ import spock.lang.Specification
 @TestFor(Subscription)
 class SubscriptionSpec extends Specification {
 //static User user1 = new User()
-User user1
-static User user2 = new User()
-static Topic topic1 = new Topic()
-static Topic topic2 = new Topic()
+//static User user2 = new User()
+//static Topic topic1 = new Topic()
+//static Topic topic2 = new Topic()
 
 
     def setup() {
-         user1 = new User()
+//         user1 = new User()
 
     }
 
@@ -24,24 +24,64 @@ static Topic topic2 = new Topic()
     }
 
 
-    void "Testing Subscription Domain"() {
+    void "Testing Subscription Domain for null values"() {
+
+        given:
+        Subscription subscription = new Subscription(user: user,topic: topic,seriousness: seriousness,dateCreated: new Date(),
+                                     dateUpdated:new Date())
+
+        when:
+        boolean  validate = subscription.validate()
 
 
-        setup:
-        Subscription subscription = new Subscription(user: user,topic: topic,seriousness: seriousness,dateCreated: dateCreated)
 
-
-        boolean result = subscription.validate()
-
-        expect:
-        result == validate
+        then:
+        validate == result
 
 
 
         where:
-        user        |   topic       |       dateCreated |       seriousness     | validate
-        user1       | topic1        |   new Date()      |   Seriousness.CASUAL  | true
-        user1       | topic1        |   new Date()      |   Seriousness.CASUAL  | true
+        topic       | user       | seriousness         | result
+        new Topic() | new User() | Seriousness.CASUAL  | true
+        null        | new User() | Seriousness.SERIOUS | false
+        new Topic() | null       | Seriousness.CASUAL  | false
+        new Topic() | new User() | null                | false
+    }
+
+
+    def "Testing User not to subscribe to topic multiple times"() {
+
+        given:
+        User user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: "password",
+                userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), dateUpdated: new Date())
+        Topic topic = new Topic(topicName: "grails", createdBy: user,dateCreated: new Date(),
+                lastUpdated: new Date(), visibility: Visibility.PRIVATE)
+//        user.addToTopics(topic)
+        Subscription subscription = new Subscription(user: user,topic: topic,seriousness: Seriousness.CASUAL,
+                dateCreated: new Date(),
+                dateUpdated:new Date())
+
+        when:
+        subscription.save()
+
+        then:
+        Subscription.count() ==1
+
+        when:
+        Subscription subscription2 = new Subscription(user: user,topic: topic,seriousness: Seriousness.CASUAL,
+                dateCreated: new Date(),
+                dateUpdated:new Date())
+        subscription2.save()
+
+        then:
+        Subscription.count == 1
+
+
+
+
+
 
     }
+
 }
+
