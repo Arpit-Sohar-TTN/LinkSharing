@@ -1,8 +1,7 @@
 package linksharing
 
-import grails.test.mixin.Mock
+import com.ttn.util.Constants
 import grails.test.mixin.TestFor
-import org.mockito.Spy
 import spock.lang.Specification
 
 /**
@@ -22,8 +21,8 @@ class LinkResourceSpec extends Specification {
     def "validateLinkResource"() {
 
         given:
-         user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: "password",
-                userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), dateUpdated: new Date())
+         user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.password,
+                userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), lastUpdated: new Date())
          topic = new Topic(topicName: "grails", createdBy: user,dateCreated: new Date(),
                 lastUpdated: new Date(), visibility: Visibility.PRIVATE)
         LinkResource linkResource = new LinkResource(url: url, description: description, createdBy: user, topic: topic)
@@ -44,4 +43,29 @@ class LinkResourceSpec extends Specification {
         "description" | ' '                        | false
         "description" | null                       | false
     }
+
+
+
+
+    def "tostringCheck"() {
+
+        setup:
+        LinkResource linkResource = new LinkResource(url: url)
+
+        when:
+        result == linkResource.toString()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        url                               | result
+        "http://www.testLinkResource.com" | "LinkResource{url='http://www.testLinkResource.com'}"
+        ""                                | "LinkResource{url=''}"
+        null                              | "LinkResource{url=null}"
+    }
+
+
+
+
 }

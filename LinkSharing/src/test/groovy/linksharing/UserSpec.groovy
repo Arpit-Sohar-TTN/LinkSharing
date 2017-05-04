@@ -1,11 +1,9 @@
 package linksharing
 
-import grails.test.mixin.Mock
+import com.ttn.util.Constants
 import grails.test.mixin.TestFor
-import spock.lang.IgnoreRest
 import spock.lang.Specification
 import spock.lang.Unroll
-import java.util.Date
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -31,7 +29,7 @@ class UserSpec extends Specification {
         User user = new User(firstName: firstName, lastName: lastName,
                 email: email, userName: userName, password: password,
                 isActive: isActive, image: image, isAdmin: isAdmin,
-                dateCreated: dateCreated,dateUpdated: dateUpdated)
+                dateCreated: dateCreated, lastUpdated: dateUpdated)
         boolean result = user.validate()
 
         expect:
@@ -39,10 +37,10 @@ class UserSpec extends Specification {
         result == validate
 
         where:
-        firstName  | lastName | email             | userName   | password    | isActive | image | isAdmin | dateCreated | dateUpdated | validate
-        "Arpit"    | "Sohar"  | "arpit@ttn.com"   | "arpit"    | "abcdefghi" | true     | []    | true    | new Date()  | new Date()  | true
+        firstName  | lastName | email             | userName   | password           | isActive | image | isAdmin | dateCreated | dateUpdated | validate
+        "Arpit"    | "Sohar"  | "arpit@ttn.com"   | "arpit"    | Constants.password | true     | []    | true    | new Date()  | new Date()  | true
 // checking for email format
-        "prashant" | "gupta"  | "prashantttn.com" | "prashant" | "123456"    | true     | []    | true    | new Date()  | new Date()  | false
+        "prashant" | "gupta"  | "prashantttn.com" | "prashant" | Constants.password | true     | []    | true    | new Date()  | new Date()  | false
 
     }
 
@@ -58,7 +56,7 @@ class UserSpec extends Specification {
                 isActive: true,
                 isAdmin: false,
                 dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         when:
              user.save()
         then:
@@ -69,10 +67,10 @@ class UserSpec extends Specification {
                 firstName: "fname",
                 lastName: "lname",
                 email: "123@gmail.com",
-                password: "password",
+                password: Constants.password,
                 userName: username,
                 dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         newUser.save()
 
         then:
@@ -87,12 +85,12 @@ class UserSpec extends Specification {
         User user = new User(firstName: "fname",
                 lastName: "lname",
                 email: email,
-                password: "password",
+                password: Constants.password,
                 userName: "Arpit",
                 isActive: true,
                 isAdmin: false,
                 dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         when:
         user.save(failOnError:true)
         then:
@@ -104,9 +102,9 @@ class UserSpec extends Specification {
                 lastName: "lname",
                 email: email,
                 password: "password",
-                userName: "Arpit Sohar",
+                userName: Constants.password,
                 dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         newUser.save()
 
         then:
@@ -114,5 +112,19 @@ class UserSpec extends Specification {
         newUser.errors.allErrors.size() == 1
         newUser.errors.getFieldErrorCount('email') == 1
     }
+    def "tostringCheck"() {
 
+        given:
+        User user = new User(userName: userName)
+
+        when:
+        result == user.toString()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        userName      | result
+        "Arpit Sohar" | "User{userName='Arpit Sohar'}"
+    }
 }

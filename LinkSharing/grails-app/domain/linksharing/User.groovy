@@ -14,7 +14,7 @@ class User {
     boolean isAdmin
     boolean isActive
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingItem,resources:Resource]
 
     static transients = ['fullName']
@@ -32,5 +32,12 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
         isAdmin nullable:true
         isActive nullable: true
         image nullable: true
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                '}';
     }
 }

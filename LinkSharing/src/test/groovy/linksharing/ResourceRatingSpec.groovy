@@ -18,7 +18,7 @@ class ResourceRatingSpec extends Specification {
         Resource resource = new DocumentResource(filePath: "home/arpit", description: "Description",
                 createdBy: user, topic: topic)
         ResourceRating resourceRating = new ResourceRating(resource: resource, user: user, score: 2, dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
 
         when:
         resourceRating.save()
@@ -28,7 +28,7 @@ class ResourceRatingSpec extends Specification {
 
         when:
         ResourceRating resourceRating2 = new ResourceRating(resource: resource, user: user, score: 2, dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         resourceRating2.save()
 
         then:
@@ -40,7 +40,7 @@ class ResourceRatingSpec extends Specification {
     def "Validating Score "() {
         setup:
         ResourceRating resourceRating = new ResourceRating(resource: resource, user: user, score: score,
-                dateCreated: dateCreated, dateUpdated: dateUpdated)
+                dateCreated: dateCreated, lastUpdated: dateUpdated)
 
 
         when:

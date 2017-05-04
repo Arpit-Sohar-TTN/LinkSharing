@@ -18,7 +18,7 @@ class ReadingItemSpec extends Specification {
         Resource resource = new DocumentResource(filePath: "home/arpit", description: "Description",
                 createdBy: user, topic: topic)
         ReadingItem readingItem = new ReadingItem(user: user,isRead: true,resource: resource,dateCreated: new Date(),
-                                    dateUpdated: new Date())
+                                    lastUpdated: new Date())
 
         when:
         readingItem.save()
@@ -28,7 +28,7 @@ class ReadingItemSpec extends Specification {
 
         when:
         ReadingItem readingItem2 = new ReadingItem(user: user,isRead: true,resource: resource,dateCreated: new Date(),
-                dateUpdated: new Date())
+                lastUpdated: new Date())
         readingItem2.save()
 
         then:

@@ -83,5 +83,20 @@ class TopicSpec extends Specification {
         Topic.count == 1
 
     }
+    def "toStringCheck"() {
 
+        given:
+        User user = new User(userName: "Arpit Sohar")
+        Topic topic = new Topic(topicName: name1, createdBy: user)
+
+        when:
+        String topicName = topic.toString()
+
+        then:
+        topicName == result
+
+        where:
+        name1    | result
+        "Grails" | "Topic{topicName='Grails'}"
+    }
 }

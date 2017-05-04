@@ -5,12 +5,11 @@ class ReadingItem {
     boolean isRead
     Resource resource
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 
     static belongsTo = [user:User, resource:Resource]
 
     static constraints = {
         resource unique: ['user']
-
     }
 }

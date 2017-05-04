@@ -32,7 +32,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
         }
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
-    logger("grails.app.controllers", WARN, ['FULL_STACKTRACE'], false)
+    logger("StackTrace", INFO, ['FULL_STACKTRACE'], false)
+    logger("grails.app", ALL, ['STDOUT'], false)
 
 }
 root(ERROR, ['STDOUT'])

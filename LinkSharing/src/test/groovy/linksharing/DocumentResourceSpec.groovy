@@ -44,4 +44,21 @@ class DocumentResourceSpec extends Specification {
         ""                | ""
         null              | null
     }
+
+   /* def "tostringCheck"() {
+        setup:
+        DocumentResource documentResource = new DocumentResource(filePath: filePath)
+
+        when:
+        result == documentResource.toString()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        filePath          | result
+        "/some/file/path" | "/some/file/path"
+        ""                | ""
+        null              | null
+    }*/
 }

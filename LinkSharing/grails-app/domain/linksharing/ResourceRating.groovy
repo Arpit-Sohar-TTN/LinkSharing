@@ -6,7 +6,7 @@ class ResourceRating {
     User user
     int score
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 
     static belongsTo = [resource:Resource]
 

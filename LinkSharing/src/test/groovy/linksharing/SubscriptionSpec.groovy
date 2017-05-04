@@ -1,6 +1,6 @@
 package linksharing
 
-import grails.test.mixin.Mock
+import com.ttn.util.Constants
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -28,7 +28,7 @@ class SubscriptionSpec extends Specification {
 
         given:
         Subscription subscription = new Subscription(user: user,topic: topic,seriousness: seriousness,dateCreated: new Date(),
-                                     dateUpdated:new Date())
+                                     lastUpdated:new Date())
 
         when:
         boolean  validate = subscription.validate()
@@ -52,14 +52,14 @@ class SubscriptionSpec extends Specification {
     def "Testing User not to subscribe to topic multiple times"() {
 
         given:
-        User user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: "password",
-                userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), dateUpdated: new Date())
+        User user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.password,
+                userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), lastUpdated: new Date())
         Topic topic = new Topic(topicName: "grails", createdBy: user,dateCreated: new Date(),
                 lastUpdated: new Date(), visibility: Visibility.PRIVATE)
 //        user.addToTopics(topic)
         Subscription subscription = new Subscription(user: user,topic: topic,seriousness: Seriousness.CASUAL,
                 dateCreated: new Date(),
-                dateUpdated:new Date())
+                lastUpdated:new Date())
 
         when:
         subscription.save()
@@ -70,7 +70,7 @@ class SubscriptionSpec extends Specification {
         when:
         Subscription subscription2 = new Subscription(user: user,topic: topic,seriousness: Seriousness.CASUAL,
                 dateCreated: new Date(),
-                dateUpdated:new Date())
+                lastUpdated:new Date())
         subscription2.save()
 
         then:
