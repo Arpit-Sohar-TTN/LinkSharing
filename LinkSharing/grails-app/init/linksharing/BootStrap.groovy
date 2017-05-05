@@ -30,9 +30,9 @@ class BootStrap {
         Integer counter = User.count()
         if (!counter) {
             User admin = new User(id: 0,firstName: "Admin",lastName: "TTN",userName: "adminTTN",
-                    email: "admin@ttn.com",isActive: true,password: "admin",isAdmin: true)
+                    email: "admin@ttn.com",isActive: true,password: "admin",confirmPassword: "admin",isAdmin: true)
             User user = new User(id: 1,firstName: "Arpit",lastName: "Sohar",userName: "ArpitSohar",
-                    email: "arpit.sohar@ttn.com",isAdmin: false,isActive: true,password: Constants.password)
+                    email: "arpit.sohar@ttn.com",isAdmin: false,isActive: true,password: Constants.password,confirmPassword: Constants.password)
             admin.save(flush:true,failOnError:true)
             user.save(flush:true,failOnError:true)
             log.info("Admin & First User saved")

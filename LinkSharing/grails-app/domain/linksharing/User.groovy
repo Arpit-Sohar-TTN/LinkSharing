@@ -15,9 +15,10 @@ class User {
     boolean isActive
     Date dateCreated
     Date lastUpdated
+    String confirmPassword
 static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingItem,resources:Resource]
 
-    static transients = ['fullName']
+    static transients = ['fullName','confirmPassword']
     String getFullName() {
         return "${firstName}  ${lastName}"
     }
@@ -28,11 +29,17 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
         lastName blank: false, nullable: false
         userName blank: false, nullable: false, unique: true
         email email: true, nullable: false, unique: true, blank: false
-        password nullable: false, blank: false, size:5..15
+        password nullable: false, blank: false, size:5..15, validator: {val, obj->
+            obj.confirmPassword == val
+            }
+        confirmPassword nullable: true, blank: true, size:5..15
         isAdmin nullable:true
         isActive nullable: true
         image nullable: true
+
+
     }
+
 
     @Override
     public String toString() {

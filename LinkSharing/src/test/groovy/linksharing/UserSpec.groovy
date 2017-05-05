@@ -2,6 +2,7 @@ package linksharing
 
 import com.ttn.util.Constants
 import grails.test.mixin.TestFor
+import org.apache.tomcat.util.bcel.Const
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -27,7 +28,7 @@ class UserSpec extends Specification {
 
         setup:
         User user = new User(firstName: firstName, lastName: lastName,
-                email: email, userName: userName, password: password,
+                email: email, userName: userName, password: password,confirmPassword: password,
                 isActive: isActive, image: image, isAdmin: isAdmin,
                 dateCreated: dateCreated, lastUpdated: dateUpdated)
         boolean result = user.validate()
@@ -51,7 +52,7 @@ class UserSpec extends Specification {
         User user = new User(firstName: "fname",
                 lastName: "lname",
                 email: "1234@gmail.com",
-                password: "password",
+                password: "password",confirmPassword: "password",
                 userName: username,
                 isActive: true,
                 isAdmin: false,
@@ -68,6 +69,7 @@ class UserSpec extends Specification {
                 lastName: "lname",
                 email: "123@gmail.com",
                 password: Constants.password,
+                confirmPassword: Constants.password,
                 userName: username,
                 dateCreated: new Date(),
                 lastUpdated: new Date())
@@ -85,7 +87,7 @@ class UserSpec extends Specification {
         User user = new User(firstName: "fname",
                 lastName: "lname",
                 email: email,
-                password: Constants.password,
+                password: Constants.password,confirmPassword: Constants.password,
                 userName: "Arpit",
                 isActive: true,
                 isAdmin: false,
@@ -101,8 +103,8 @@ class UserSpec extends Specification {
                 firstName: "fname",
                 lastName: "lname",
                 email: email,
-                password: "password",
-                userName: Constants.password,
+                password: Constants.password,confirmPassword: Constants.password,
+                userName: "Arpit Sohar",
                 dateCreated: new Date(),
                 lastUpdated: new Date())
         newUser.save()
@@ -127,4 +129,5 @@ class UserSpec extends Specification {
         userName      | result
         "Arpit Sohar" | "User{userName='Arpit Sohar'}"
     }
+
 }

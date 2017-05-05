@@ -11,9 +11,11 @@ class UrlMappings {
             }
         }
 
-        "/User"(controller: "User",action: "noAction")
+//        "/User"(controller: "User",action: "noAction")
+
         "/errorTest"(controller: "Test",action: "save")
         "/"(view:"/index")
+        "/demo"(view:"/demo")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
