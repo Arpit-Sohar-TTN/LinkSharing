@@ -22,7 +22,8 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
     String getFullName() {
         return "${firstName}  ${lastName}"
     }
-    static mapping = {image (sqlType: 'longblob' )}
+    static mapping = {image (sqlType: 'longblob' )
+                        sort id :'desc'}
 
     static constraints = {
         firstName blank: false, nullable: false
@@ -36,6 +37,7 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
         isAdmin nullable:true
         isActive nullable: true
         image nullable: true
+        topics lazy:false
 
 
     }

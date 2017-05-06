@@ -70,9 +70,9 @@ class LoginControllerSpec extends Specification {
 
     def "checkIfUserExistsButIsActive"() {
         given:
-        User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "arpitSohar",
-                email: "arpit.sohar@gmail.com", password: Constants.password, admin: true,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+        User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
+                email: "arpit.sohar@ttn.com", password: Constants.password, isAdmin: false,
+                isActive: true, photo: "abc".bytes, confirmPassword: Constants.password)
         user.save(flush: true)
 
         when:
@@ -80,6 +80,6 @@ class LoginControllerSpec extends Specification {
 
         then:
 //        session['user'] == user
-        response.redirectedUrl == '/login/index'
+        response.redirectedUrl == '/user/index'
     }
 }

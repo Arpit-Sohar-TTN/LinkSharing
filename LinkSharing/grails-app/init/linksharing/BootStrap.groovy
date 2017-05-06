@@ -17,10 +17,10 @@ class BootStrap {
         createTopics()
         createResources()
         subscribeTopics()
-        println "1"
         createReadingItems()
-        println "3"
         createResourceRatings()
+        println Topic.all
+        println User.all
 
     }
     def destroy = {
@@ -52,7 +52,7 @@ class BootStrap {
             if (topicCountOfUser<=5) {
 
                 (5-topicCountOfUser).times {
-                    Topic topic = new Topic(topicName: "Topic ${it}",createdBy: user,visibility: Visibility.PRIVATE)
+                    Topic topic = new Topic(topicName: "Topic ${it}",createdBy: user,visibility: Visibility.PUBLIC)
                     if (topic.save(flush:true,failOnError:true)) {
                         user.addToTopics(topic)
                         log.info("Topic ${topic} saved and add to user ${user}")

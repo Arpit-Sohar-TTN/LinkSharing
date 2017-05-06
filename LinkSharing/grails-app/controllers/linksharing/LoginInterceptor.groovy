@@ -9,6 +9,7 @@ class LoginInterceptor {
     }
     boolean before() {
         if(!session.getAttribute('user')) {
+
             redirect(controller: "login", action: "index")
         }
         true

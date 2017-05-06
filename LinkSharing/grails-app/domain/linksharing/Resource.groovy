@@ -1,6 +1,7 @@
 package linksharing
 
 abstract class Resource {
+    User createdBy
     String description
     Topic topic
     Date dateCreated

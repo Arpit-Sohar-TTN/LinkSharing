@@ -7,6 +7,7 @@ class Topic {
     Date lastUpdated
     Visibility visibility
 
+
     static belongsTo = [createdBy:User]
     static hasMany = [subscriptions:Subscription , resources:Resource]
 
@@ -14,7 +15,10 @@ class Topic {
         topicName blank: false
         createdBy(unique: ['topicName'])
     }
+    static mapping = {
+        sort "topicName"
 
+    }
 
     @Override
     public String toString() {

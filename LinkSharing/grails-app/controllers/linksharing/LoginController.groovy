@@ -15,7 +15,7 @@ class LoginController {
             if (user) {
                 if (user.isActive){
                     session.setAttribute("user",user)
-                    redirect(controller: user, action: 'index')
+                    redirect(controller: 'user', action: 'index')
                 } else {
                     log.error("User is not active")
                     flash.error = "User is not active"

@@ -15,9 +15,22 @@ class Subscription {
         seriousness nullable: false
         user(unique: ['topic'])
     }
+    static mapping = {
+        seriousness defaultValue:Seriousness.SERIOUS
+
+
+    }
 }
 enum Seriousness {
     SERIOUS,
     VERY_SERIOUS,
     CASUAL
+   static Seriousness convertIntoEnum(String value) {
+        if (value == 'SERIOUS')
+            return Seriousness.SERIOUS
+        else if (value == 'VERY_SERIOUS')
+            return Seriousness.VERY_SERIOUS
+        else if (value == 'CASUAL')
+            return Seriousness.CASUAL
+    }
 }
