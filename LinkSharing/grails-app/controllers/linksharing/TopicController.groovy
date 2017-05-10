@@ -1,21 +1,28 @@
 package linksharing
 
+import com.ttn.co.ResourceSearchCO
 import com.ttn.co.TopicCO
 
 class TopicController {
 
+    TopicService topicService = new TopicService()
+
+
     def index(String to) {
-        TopicCO topicCO = new TopicCO(topicName: to,visibility: Visibility.PUBLIC)
+        TopicCO topicCO = new TopicCO(topicName: to,visibility: Visibility.PRIVATE)
         save(topicCO,"SERIOUS")
         render "Topic index"
     }
 
+
+
     def save(TopicCO topicCO,String seriousness) {
         User user = session?.getAttribute('user')
         if (user) {
+            println topicCO
             topicCO.createdBy = user
             Topic topic =  new Topic()
-            bindData(topic,topicCO)
+            bindData(topic,topicCO,[include:['topicName','visibility']])
             println topic.createdBy
             println topic.topicName
             println user.userName
@@ -24,7 +31,11 @@ class TopicController {
             user1.addToTopics(topic)
             println user1.confirmPassword
             user1.confirmPassword = 'arpit'
-            if (topic.save(flush:true)) {
+           if( topicService.topicSave(topic,user1,Seriousness.convertIntoEnum(seriousness)))
+               render "Success ! ${topic} has been saved by ${user}"
+            else
+               render "Failed to save topic"
+           /* if (topic.save(flush:true,failOnError:true)) {
                 Subscription subscription = new Subscription(topic: topic,user: user1,seriousness: Seriousness.convertIntoEnum(seriousness))
                 if( subscription.save(flush:true,failOnError:true))
                     log.info("Created user ${user} also subscribed to its created topic ${topic}")
@@ -37,7 +48,7 @@ class TopicController {
             else {
 //                flash.error = "Failed to save topic"
                 render "Failed to save topic"
-            }
+            }*/
         }
         else {
             render "First login then save the topic"
@@ -47,13 +58,15 @@ class TopicController {
 
     }
 
-    def show(int id) {
-        Topic topic = Topic?.read(id)
+    def show(ResourceSearchCO resourceSearchCO) {
+//        Topic topic = Topic?.read()
+        println resourceSearchCO
+        Topic topic = Topic.findById(resourceSearchCO.topicId)
         if (topic) {
             if (topic.visibility == Visibility.PUBLIC)
                 render "success for ${topic} whose visibility is ${topic.visibility}"
             else {
-                User user = User.findById(id)
+                User user = User.findByUserName(session.getAttribute('user').userName)
                 Subscription subscription = Subscription.findByUserAndTopic(user,topic)
                 if (subscription) {
                     render "success for ${topic} whose visibility is ${topic.visibility}"
@@ -90,5 +103,14 @@ class TopicController {
             flash.message = "You are not authenticate to delete this topic"
             render flash.message
         }
+    }
+
+
+    def trendingTopics() {
+        render Topic.getTrendingTopics()
+    }
+    def subscribedUsers(int topicId) {
+       render Topic.getSubscribedUsers(Topic.findById(topicId))
+
     }
 }

@@ -1,5 +1,6 @@
 package linksharing
 
+import com.ttn.co.SearchCO
 import javassist.bytecode.ByteArray
 import sun.security.util.Password
 
@@ -43,10 +44,29 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
     }
 
 
+
+    List<ReadingItem> getUnReadResources(SearchCO searchCO) {
+//        List<ReadingItem> unreadItems =[]
+        println searchCO
+        if (searchCO.q) {
+            List<ReadingItem> unreadItems = ReadingItem.createCriteria().list {
+                        eq('user',this)
+                        println searchCO.q
+                        resource {
+                            ilike('description',"%${searchCO.q}%")
+                        }
+
+                        eq('isRead',false)
+                        max searchCO.max.toString()
+                        order('lastUpdated',searchCO.order)
+            }
+            println unreadItems
+            return unreadItems
+        }
+
+    }
     @Override
     public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                '}';
+        return  userName
     }
 }

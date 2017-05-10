@@ -79,13 +79,16 @@ class BootStrap {
 
 
     def createResources() {
+        String descriptionContent = """This is a panel consist of recent shares which will be used thoughout the applic This is a panel consist 
+                                            of recent shares which will be used thoughout the applic This is a panel consist of recent shares 
+                                            which will be used thoughout the application """
         List topics = Topic.all
         topics.each { topic->
             Integer countResources = Resource.countByTopic(topic)
             if (countResources<1) {
                 2.times {
-                    Resource linkResource = new LinkResource(topic: topic,createdBy: topic.createdBy,description: "${topic.topicName}",url: "https://www.google.co.in")
-                    Resource documentResource = new DocumentResource(topic: topic,createdBy: topic.createdBy,description: "${topic.topicName}",filePath: "/home/arpit/")
+                    Resource linkResource = new LinkResource(topic: topic,createdBy: topic.createdBy,description: "${descriptionContent}",url: "https://www.google.co.in")
+                    Resource documentResource = new DocumentResource(topic: topic,createdBy: topic.createdBy,description: "${descriptionContent}",filePath: "/home/arpit/")
                     if (linkResource.save(flush:true,failOnError:true)) {
                         log.info("Link Resource save")
                     }

@@ -20,6 +20,19 @@ class Subscription {
 
 
     }
+
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "id=" + id +
+                ", topic=" + topic +
+                ", user=" + user +
+                ", seriousness=" + seriousness +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                '}';
+    }
 }
 enum Seriousness {
     SERIOUS,

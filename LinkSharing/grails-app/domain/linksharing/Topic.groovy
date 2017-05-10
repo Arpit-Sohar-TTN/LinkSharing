@@ -1,5 +1,7 @@
 package linksharing
 
+import com.ttn.vo.TopicVO
+
 class Topic {
     String topicName;
     User createdBy
@@ -22,15 +24,14 @@ class Topic {
 
     @Override
     public String toString() {
-        return "Topic{" +
-                "topicName='" + topicName + '\'' +
-                '}';
+        return  topicName
     }
 
 
-   /* def afterInsert() {
+  /*  def afterInsert = {
 
         Topic.withNewSession {
+
 
             Subscription subscription = new Subscription(
                     user: this.createdBy,
@@ -39,7 +40,7 @@ class Topic {
                     dateCreated: new Date(),
                     dateUpdated: new Date()
             )
-
+            this.addToSubscriptions(subscription)
             if (subscription.save(flush: true)) {
                 log.info "${subscription}-> ${this.createdBy} subscribed for ${this}"
 
@@ -48,8 +49,57 @@ class Topic {
             }
         }
     }*/
+
+
+    static List<TopicVO> getTrendingTopics() {
+
+        List trendingTopics = Topic.createCriteria().list() {
+            //createAlias('resources', 'rsc')
+            projections {
+                groupProperty("id")
+                property("topicName")
+                property("visibility")
+                property("createdBy")
+                resources {
+                    count "id", "count"
+                }
+            }
+
+            order("count", "desc")
+            order("topicName", "desc")
+            maxResults 5 // This is just for pagination
+            firstResult 0
+        }
+        List<TopicVO> topicVOList = []
+        trendingTopics.each {
+            topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4)))
+        }
+
+    }
+    static List<User> getSubscribedUsers(Topic topic) {
+        List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
+        List<User> subscribedUsers = []
+        subscriptions.each {subscription->
+            subscribedUsers.add(subscription.user)
+        }
+        return subscribedUsers
+    }
+
 }
+
+
+
+
+
 
 enum Visibility{
     PUBLIC , PRIVATE
+
+
+    static Visibility stringtoEnum(String visibility) {
+        if (visibility.equals('PUBLIC'))
+            return Visibility.PUBLIC
+        else
+            return Visibility.PRIVATE
+    }
 }

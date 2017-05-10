@@ -1,14 +1,17 @@
 package linksharing
 
+import com.ttn.co.ResourceSearchCO
 import com.ttn.co.TopicCO
 import com.ttn.util.Constants
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
+import grails.transaction.Transactional
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
+
 @TestFor(TopicController)
 @Mock([User,Topic,Subscription])
 class TopicControllerSpec extends Specification {
@@ -96,9 +99,10 @@ class TopicControllerSpec extends Specification {
         String topicName = "Groovy"
         Topic topic = new Topic(id: 1,createdBy:user,topicName: topicName,visibility: Visibility.PUBLIC)
         topic.save(flush:true)
+        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(topicId:1,visibility: Visibility.PUBLIC)
 
         when:
-        controller.show(1)
+        controller.show(resourceSearchCO)
 
         then:
         response.text == "success for ${topic} whose visibility is ${topic.visibility}"
@@ -114,9 +118,10 @@ class TopicControllerSpec extends Specification {
         String topicName = "Groovy"
         Topic topic = new Topic(id: 1,createdBy:user,topicName: topicName,visibility: Visibility.PRIVATE)
         topic.save(flush:true)
+        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(topicId:1,visibility: Visibility.PUBLIC)
 
         when:
-        controller.show(1)
+        controller.show(resourceSearchCO)
 
         then:
         response.redirectedUrl == '/login/index'

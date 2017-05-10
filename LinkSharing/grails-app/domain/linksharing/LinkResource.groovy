@@ -11,7 +11,8 @@ class LinkResource extends Resource{
     @Override
     public String toString() {
         return "LinkResource{" +
-               url + '\'' +
+                "id=" + id +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

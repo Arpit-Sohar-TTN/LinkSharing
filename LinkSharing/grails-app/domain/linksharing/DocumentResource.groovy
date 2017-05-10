@@ -8,7 +8,8 @@ class  DocumentResource extends Resource {
 
     @Override
     public String toString() {
-        return "DocumentResource{"
+        return "DocumentResource{" +
+                "id=" + id +
                 ", filePath='" + filePath + '\'' +
                 '}';
     }

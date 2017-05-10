@@ -12,7 +12,7 @@ import javax.validation.Valid
 
 class TopicCO implements Validateable{
 
-    String topicName;
+    String topicName
     User createdBy
     Date dateCreated
     Date lastUpdated
@@ -20,5 +20,16 @@ class TopicCO implements Validateable{
 
     static constraints = {
         topicName blank: false
+    }
+
+    @Override
+    public String toString() {
+        return "TopicCO{" +
+                "topicName='" + topicName + '\'' +
+                ", createdBy=" + createdBy +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                ", visibility=" + visibility +
+                '}';
     }
 }
