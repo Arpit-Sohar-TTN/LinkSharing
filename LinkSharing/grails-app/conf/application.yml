@@ -106,7 +106,7 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create
+            dbCreate: create-drop
             url: jdbc:mysql://localhost:3306/LinkSharing
 
 

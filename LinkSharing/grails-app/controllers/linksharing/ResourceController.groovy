@@ -3,6 +3,7 @@ package linksharing
 import com.ttn.co.DocumentResourceCO
 import com.ttn.co.LinkResourceCO
 import com.ttn.co.ResourceSearchCO
+import com.ttn.util.Constants
 
 class ResourceController {
 
@@ -41,22 +42,34 @@ class ResourceController {
         render Resource.getRatingInfo(resourceId)
     }
 
-    def saveLinkResource(LinkResourceCO linkResourceCO) {
-        LinkResource linkResource = new LinkResource()
-        bindData(linkResource, linkResourceCO)
-        if (linkResource.save(flush: true, failOnError: true)) {
+    def saveLinkResource(String url,String description,String topic) {
+//        bindData(linkResource, linkResourceCO)
+        User user = session.getAttribute('user')
+        Topic topic1 = Topic.findByTopicName(topic)
+        LinkResource linkResource = new LinkResource(url: url,createdBy: user,description: description,topic: topic1)
+
+//        linkResource.createdBy = user
+//        linkResource.topic = Topic.get(2)
+        if (linkResource.save(flush: true,failOnError:true)) {
             flash.message = "Link Resource Saved"
         } else {
             flash.error = "Fail to save resource"
         }
+        redirect(controller:'user',action:'index')
     }
-    def saveDocumentResource(DocumentResourceCO documentResourceCO) {
-        DocumentResource documentResource = new DocumentResource()
-        bindData(documentResource, documentResourceCO)
+    def saveDocumentResource( String description, String topicName) {
+        User user = session.getAttribute('user')
+        def file = params.attachment
+        String filePath = "${Constants.filePath}/${file}"
+        File file2 = new File(filePath)
+        file.transferTo(file2)
+        Topic topic1 = Topic.findByTopicName(topicName)
+        DocumentResource documentResource = new DocumentResource(filePath: filePath,createdBy: user,description: description,topic: topic1)
         if (documentResource.save(flush: true, failOnError: true)) {
             flash.message = "Document Resource Saved"
         } else {
             flash.error = "Fail to save resource"
         }
+        redirect(controller:'user',action:'index')
     }
 }

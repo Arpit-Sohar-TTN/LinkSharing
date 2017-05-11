@@ -6,14 +6,18 @@ import com.ttn.vo.ResourceVO
 
 class LoginController {
 
-
+        def dummy(){
+            render "Hello World"
+        }
 
         def index(){
+//            render(view:"/login/index")
 //           render "Login Here"+Resource.topPost()
             List<ResourceVO> topPosts = Resource.topPost()
             List<ResourceVO> recentShares = Resource.recentShares()
-            println topPosts.class
-            render view: 'home',model: [topPosts:topPosts,recentShares:recentShares]
+            println recentShares
+            render view: 'index',model: [topPosts:topPosts,recentShares:recentShares]
+
         }
 
 
@@ -70,6 +74,8 @@ class LoginController {
                     redirect(controller: 'login' ,action: 'index' )
                 }
             }
+
         }
+
     }
 

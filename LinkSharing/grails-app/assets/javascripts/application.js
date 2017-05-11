@@ -7,6 +7,10 @@
 //
 //= require jquery-2.2.0.min
 //= require bootstrap
+//= require bootstrap.min
+//= require linkSharing
+//= require navbar
+//= require navbar2
 //= require_tree .
 //= require_self
 

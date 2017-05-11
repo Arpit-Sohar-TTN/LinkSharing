@@ -51,10 +51,10 @@ class Topic {
     }*/
 
 
-    static List<TopicVO> getTrendingTopics() {
+   /* static List<TopicVO> getTrendingTopics(User user) {
 
         List trendingTopics = Topic.createCriteria().list() {
-            //createAlias('resources', 'rsc')
+
             projections {
                 groupProperty("id")
                 property("topicName")
@@ -72,10 +72,38 @@ class Topic {
         }
         List<TopicVO> topicVOList = []
         trendingTopics.each {
-            topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4)))
+            Topic topic = Topic.findByTopicName(it.getAt(1))
+            Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+            if (subscription)
+                topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
+            else
+                topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
         }
 
+    }*/
+
+
+    static List<TopicVO> getTrendingTopics() {
+        List<TopicVO> trendingTopics = []
+        Resource.createCriteria().list {
+            createAlias('topic', 't')
+            projections {
+                groupProperty("t.id")
+                property("t.topicName")
+                property("t.visibility")
+                property("t.createdBy")
+                count("t.id", "topicCount")
+            }
+            order("topicCount", "desc")
+            order("t.topicName", "desc")
+            maxResults(5)
+        }.each {
+            trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
+                    createdBy: it[3], count: it[4]))
+        }
+        return trendingTopics
     }
+
     static List<User> getSubscribedUsers(Topic topic) {
         List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
         List<User> subscribedUsers = []

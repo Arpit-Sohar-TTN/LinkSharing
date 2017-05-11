@@ -5,4 +5,7 @@ package com.ttn.util
  */
 class Constants {
     static password = "arpit"
+    static defaultSeriousness="SERIOUS"
+    static filePath = "/home/arpit/Desktop/LinkSharingFiles/"
+
 }

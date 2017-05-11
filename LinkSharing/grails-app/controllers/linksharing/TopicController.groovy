@@ -2,6 +2,8 @@ package linksharing
 
 import com.ttn.co.ResourceSearchCO
 import com.ttn.co.TopicCO
+import com.ttn.util.Constants
+import org.apache.tomcat.util.bcel.classfile.Constant
 
 class TopicController {
 
@@ -13,29 +15,50 @@ class TopicController {
         save(topicCO,"SERIOUS")
         render "Topic index"
     }
+    def showTopic(Long id) {
+        println id
+        Topic topic = Topic.findById(id)
+        println topic.subscriptions.size()
+        List<Resource> resourceList = Resource.findAllByTopic(topic)
+        User user = session.getAttribute('user')
+        if (user) {
+
+            render view:'topicShow',model: [topic:topic]
+
+        } else {
+            redirect(controller: 'login',action: 'index')
+        }
+        println topic
 
 
 
-    def save(TopicCO topicCO,String seriousness) {
+    }
+
+
+/*    def save(TopicCO topicCO,String seriousness) {
         User user = session?.getAttribute('user')
         if (user) {
-            println topicCO
+
             topicCO.createdBy = user
+            topicCO.visibility = Visibility.PUBLIC
             Topic topic =  new Topic()
             bindData(topic,topicCO,[include:['topicName','visibility']])
-            println topic.createdBy
-            println topic.topicName
-            println user.userName
             User user1 = User.findByUserName(user.userName)
-            println topic.toString() + " " + user1.toString()
             user1.addToTopics(topic)
-            println user1.confirmPassword
-            user1.confirmPassword = 'arpit'
-           if( topicService.topicSave(topic,user1,Seriousness.convertIntoEnum(seriousness)))
-               render "Success ! ${topic} has been saved by ${user}"
+            seriousness = "SERIOUS"
+            println topic
+            println user1
+           if( topicService.topicSave(topic,user1,Seriousness.convertIntoEnum(seriousness))){
+
+               flash.message = "Success ! ${topic} has been saved by ${user}"
+                forward(controller: 'user',action:'index')
+           }
+
             else
-               render "Failed to save topic"
-           /* if (topic.save(flush:true,failOnError:true)) {
+               flash.error = "Failed to save the topic"
+            redirect(controller: 'user')
+
+           *//* if (topic.save(flush:true,failOnError:true)) {
                 Subscription subscription = new Subscription(topic: topic,user: user1,seriousness: Seriousness.convertIntoEnum(seriousness))
                 if( subscription.save(flush:true,failOnError:true))
                     log.info("Created user ${user} also subscribed to its created topic ${topic}")
@@ -48,18 +71,35 @@ class TopicController {
             else {
 //                flash.error = "Failed to save topic"
                 render "Failed to save topic"
-            }*/
+            }*//*
         }
         else {
-            render "First login then save the topic"
+            flash.error = "Please Login First"
+
         }
 
 
 
+    }*/
+    def save(String topicName,String visibility) {
+        Visibility visibility1 = Visibility.stringtoEnum(visibility)
+        User user = session.getAttribute('user')
+        if (user) {
+            Topic topic =  new Topic(topicName: topicName,createdBy: user,visibility: visibility1)
+            String seriousness = Constants.defaultSeriousness
+            Seriousness seriousness1 = Seriousness.convertIntoEnum(seriousness)
+            if (topicService.topicSave(topic,user,seriousness1)) {
+                flash.message = "Topic Saved Successfully"
+                forward(controller:'user',action:'index')
+            }
+            else {
+                flash.error = "Topic Not saved"
+                forward(controller:'user',action:'index')
+            }
+        }
     }
 
     def show(ResourceSearchCO resourceSearchCO) {
-//        Topic topic = Topic?.read()
         println resourceSearchCO
         Topic topic = Topic.findById(resourceSearchCO.topicId)
         if (topic) {

@@ -6,15 +6,16 @@ import grails.interceptors.Matcher
 class ApplicationInterceptor {
 
    ApplicationInterceptor() {
-       matchAll()
+//       matchAll().excludes (controller:'user',action: 'index')
 
    }
     boolean before() {
         log.info(params.toMapString())
-//        if (!session.getAttribute('user')) {
-//            redirect(controller:'Login',action: 'index')
-//        }
-        true
+       /* if (!session.getAttribute('user')) {
+            redirect(controller:'login',action: 'index')
+        }*/
+
+
     }
 
     boolean after() {

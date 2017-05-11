@@ -31,10 +31,10 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
         lastName blank: false, nullable: false
         userName blank: false, nullable: false, unique: true
         email email: true, nullable: false, unique: true, blank: false
-        password nullable: false, blank: false, size:5..15, validator: {val, obj->
-            obj.confirmPassword == val
-            }
-        confirmPassword nullable: true, blank: true, size:5..15
+        password nullable: false, blank: false, size:5..15
+        confirmPassword nullable: true,  size:5..15, validator: {val, obj->
+            obj.password == val
+        }
         isAdmin nullable:true
         isActive nullable: true
         image nullable: true
@@ -68,5 +68,17 @@ static hasMany = [topics:Topic,subscriptions:Subscription,readingItems:ReadingIt
     @Override
     public String toString() {
         return  userName
+    }
+
+
+    static List getSubscribedTopic(User user){
+        List list = createCriteria().list(){
+            projections{
+                createAlias('subscriptions','s')
+                property('s.topic')
+            }
+            eq('s.user',user)
+        }
+        return list
     }
 }

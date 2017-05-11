@@ -1,6 +1,8 @@
 package linksharing
 
 import com.ttn.co.SearchCO
+import com.ttn.vo.TopicVO
+import com.ttn.vo.UserVO
 import grails.converters.JSON
 
 import static org.springframework.http.HttpStatus.*
@@ -9,13 +11,21 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 
 class UserController {
+    def userService
 //    static responseFormat = ["json"]
 
 //  static namespace = "test1"
 
     def index() {
 //       render "User dashboard ${session['user']}"
-        render ('view':'dashboard')
+        User user = session.getAttribute('user')
+        List<TopicVO> trendingTopics = Topic.getTrendingTopics()
+        UserVO userVO = userService.getUserVO(user)
+
+        println userVO.resourceVOList
+        List subscribedTopic = User.getSubscribedTopic(user)
+//        List<TopicVO> trendingTopics2 = userService.checkLoggedInUserSubscription(user,trendingTopics)
+        render ('view':'index',model: [user:user,trendingTopics:trendingTopics,userVO:userVO,subscribedTopic:subscribedTopic])
     }
 
     def inbox(SearchCO searchCO) {
@@ -59,32 +69,36 @@ class UserController {
     respond ([1:"test1",2:"test2",3:"Mango"])
 }
 
-    def show(int id) {
+    def topicShow(Long id) {
+        println id
         Topic topic = Topic.findById(id)
-        if (topic) {
-            if (topic.visibility == Visibility.PUBLIC)
-            render "success for ${topic} whose visibility is ${topic.visibility}"
-            else {
-                User user = User.findById(id)
-                Subscription subscription = Subscription.findByUserAndTopic(user,topic)
-                if (subscription) {
-                    render "success for ${topic} whose visibility is ${topic.visibility}"
-                }
+        if (session.getAttribute('user')) {
+            if (topic) {
+                if (topic.visibility == Visibility.PUBLIC)
+                    redirect(controller: 'topic', action: 'showTopic')
                 else {
-                    flash.error = "User not subscribed to required private topic"
-                    redirect(controller:'login', action:'index')
+                    User user = User.findById(id)
+                    Subscription subscription = Subscription.findByUserAndTopic(user, topic)
+                    if (subscription) {
+//                    render "success for ${topic} whose visibility is ${topic.visibility}"
+                        render view: 'topic/index'
+                    } else {
+                        flash.error = "User not subscribed to required private topic"
+                        redirect(controller: 'login', action: 'index')
+
+                    }
 
                 }
 
+            } else {
+                flash.error = "Topic not exist in DB"
+                redirect(controller: 'login', action: 'index')
             }
-
+        } else {
+            redirect(controller: 'login',action: 'index')
         }
-        else{
-            flash.error = "Topic not exist in DB"
-            redirect(controller:'login', action:'index')
-        }
-
         println topic
+
 
     }
 
