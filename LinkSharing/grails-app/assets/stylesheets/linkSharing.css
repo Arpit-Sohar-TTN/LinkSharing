@@ -1,0 +1,302 @@
+/*background*/
+/*html {
+    background: url("../assets/back2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+/*body{
+    background-image: url("../assets/back2.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: crimson;
+}*/
+/*./background*/
+/*
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot');
+    src:url('');
+    src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.woff') format('woff'),
+    url('../fonts/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+
+
+/*logo*/
+.logo {
+    height: 35px;
+    width: 50px;
+}
+/*./logo*/
+
+
+/*searchbox*/
+h1 {
+    color: green;
+    text-align: center;
+}
+.redfamily {
+    color: Black;
+}
+.search-box{
+    position: relative;
+    padding-top: 10px;
+    padding-right: 50px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.search-box {
+    width: 80%;
+    border: 1px solid #ccc;
+    outline: 0;
+    border-radius: 20px;
+}
+.search-box:focus {
+    box-shadow: 0 0 15px 5px #b0e0ee;
+    border: 2px solid #bebede;
+}
+.close-icon {
+    border:1px solid transparent;
+    background-color: transparent;
+    display: inline-block;
+    vertical-align: middle;
+    outline: 0;
+    cursor: pointer;
+    position: absolute;
+    padding-left: 55px;
+    padding-top: 40px;
+}
+.close-icon:after {
+    content: "X";
+    display: block;
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    background-color: #FA9595;
+    z-index:1;
+    right: 40px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 2px;
+    border-radius: 20%;
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 12px;
+    box-shadow: 0 0 2px #E50F0F;
+    cursor: pointer;
+}
+.search-box:not(:valid) ~ .close-icon {
+    display: none;
+}
+.searchIcon{
+    position: absolute;
+    z-index: 2;
+    left: -30px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding-top: 15px;
+    padding-right: 0px;
+    padding-left: 0;
+    padding-bottom: 10px;
+    top: 1px
+}
+/*./searchbox*/
+
+/*page*/
+.panel-footer {
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.profileImage {
+    width: 80px;
+    padding-top: 10px;
+}
+
+.myContent {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.mycompetency {
+    padding-right: 10px;
+    clear: both;
+}
+
+.viewPost {
+    padding-right: 10px;
+}
+
+.dropdownBtn {
+    font-size: 10px;
+    float: right;
+}
+
+.envIcon {
+    float: right;
+    font-size: x-large;
+    margin-right: 20px;
+}
+
+.profileSidePanel {
+    border: ridge;
+    border-radius: 5px;
+}
+
+.userIcon {
+    font-size: 2em;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+.userName{
+    padding-left: 10px;
+}
+
+.access{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.whySoSerious{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.leftMargin{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.panelBorder{
+    outline: 2px solid slategray;
+}
+
+.panel-body{
+    padding: -20px;
+}
+
+.namingLabels{
+    margin-left: 10px;
+}
+/*./page*/
+
+/*custombutton*/
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px 16px;
+}
+
+.btn-lg {
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: red;
+    border-color: red;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: red;
+    border-color: red;
+}
+
+
+  /*OUTLINE BUTTONS*/
+
+
+.btn.outline {
+    background: none;
+    padding: 12px 22px;
+}
+.btn-primary.outline {
+    border: 0px solid #0099cc;
+    color: #419641;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #33a6cc;
+    border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
+}
+
+/*CUSTON BTN VALUES*/
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+/*./custombutton*/
+
+/*
+.panel-default{
+    background: rgba(122, 130, 136, 0.2)!important;
+}*/
+
+.panel-body{
+    background-color: rgba(0,0,0,0.15);
+}
+
+.panel{
+    background-color: transparent;
+    border: 1px #222;
+}
+
+.panel-heading{
+    background : #9acfea !important;;
+}
+
+input[type="text"],input[type="password"]{
+    background-color:#66afe9 !important;
+    color: red;
+}
+    .form-control::-webkit-input-placeholder { color: white; }
+.form-control:-moz-placeholder { color: white; }
+.form-control::-moz-placeholder { color: white; }
+.form-control:-ms-input-placeholder { color: white; }
+
