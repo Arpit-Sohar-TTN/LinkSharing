@@ -7,6 +7,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.1"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
+        classpath "net.saliman:gradle-cobertura-plugin:2.3.2"
     }
 }
 
@@ -19,6 +20,8 @@ apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
+apply plugin: 'codenarc'
+apply plugin: "net.saliman.cobertura"
 
 repositories {
     mavenLocal()
@@ -49,6 +52,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     compile 'org.grails.plugins:mail:2.0.0.RC6'
     compile 'org.grails.plugins:quartz:2.0.12'
+    compile 'org.grails.plugins:remote-pagination:0.5.0'
 }
 
 bootRun {
@@ -60,6 +64,17 @@ bootRun {
 //    jvmArgs = ['-Dlocal.config.location=app-config.yml']
 //    addResources = true
 //}
+
+codenarcMain {
+    configFile = rootProject.file("grails-app/conf/CodeNarcRules.groovy")
+}
+
+cobertura {
+    coverageFormats = ['html', 'xml']
+
+}
+
+
 
 assets {
     minifyJs = true

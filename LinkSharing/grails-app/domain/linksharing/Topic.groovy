@@ -83,6 +83,45 @@ class Topic {
     }*/
 
 
+    /*static List<TopicVO> getTrendingTopics() {
+        List<TopicVO> trendingTopics = []
+     List res =    Resource.createCriteria().list {
+            createAlias('topic', 't')
+            projections {
+
+                groupProperty("t.id")
+                property("t.topicName")
+                property("t.visibility")
+                property("t.createdBy")
+                *//*topic {
+                            groupProperty("t.id")
+                        }
+                topic {
+
+                    property("topicName")
+                    property("visibility")
+                    property("createdBy")*//*
+                    count("t.subscriptions")
+
+//                count("t.subscriptions")
+
+                count("t.id", "topicCount")
+            }
+
+            order("topicCount", "desc")
+            order("topic.topicName", "desc")
+            maxResults(5)
+        }
+        println res
+     res.each {
+            trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
+                    createdBy: it[3],noOfSubscribedUsers: it[4], count: it[5]))
+        }
+        return trendingTopics
+    }
+*/
+
+
     static List<TopicVO> getTrendingTopics() {
         List<TopicVO> trendingTopics = []
         Resource.createCriteria().list {
@@ -92,6 +131,7 @@ class Topic {
                 property("t.topicName")
                 property("t.visibility")
                 property("t.createdBy")
+                count("t.subscriptions")
                 count("t.id", "topicCount")
             }
             order("topicCount", "desc")
@@ -99,11 +139,10 @@ class Topic {
             maxResults(5)
         }.each {
             trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
-                    createdBy: it[3], count: it[4]))
+                    createdBy: it[3],noOfSubscribedUsers: it[4], count: it[5]))
         }
         return trendingTopics
     }
-
     static List<User> getSubscribedUsers(Topic topic) {
         List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
         List<User> subscribedUsers = []
@@ -127,7 +166,7 @@ enum Visibility{
     static Visibility stringtoEnum(String visibility) {
         if (visibility.equals('PUBLIC'))
             return Visibility.PUBLIC
-        else
+        else if (visibility.equals('PRIVATE'))
             return Visibility.PRIVATE
     }
 }

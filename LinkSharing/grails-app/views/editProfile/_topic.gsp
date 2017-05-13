@@ -8,6 +8,13 @@
 		</div>
 
 	</div>
+
+	<g:each in="${Topics}" var="topicVO">
+		%{--<p>${topicVO.createdBy.userName == session.user.userName}</p>--}%
+	<g:if test="${(topicVO.createdBy.userName == session.user.userName)}">
+
+
+
 	<div class="panel-body" style="padding: 10px">
 		<div class="row">
 			<div class="col-md-3 col-xs-12">
@@ -18,21 +25,21 @@
 			<div class="col-md-9 col-xs-12 center-block">
 				<div class="row"><!--username-->
 					<div class="col-xs-3 col-md-3"><!--username-->
-						<i>@Agni</i>
+						<i>@${userVO.userName}</i>
 					</div><!--./username-->
 
 					<div class="col-xs-3 col-md-3 center-block"><!--socialConnect-->
-					Subscriptions<br/>60
+					Subscriptions<br/>${topicVO.noOfSubscribedUsers}
 					</div><!--./socialConnect-->
 					<div class="col-xs-3 col-md-3 pull-right"><!--viewPost-->
-						<a href="#" class=" viewPost"> Topics <br/> 30</a>
+						<a href="#" class=" viewPost"> Posts <br/> ${topicVO.count}</a>
 					</div><!--./viewPost-->
 
 				</div><!--/.username-->
 				<br/>
 				<div class="row"><!--content-->
 					<div class="col-xs-8 col-md-8"><!--searchBox-->
-						<input type="text" placeholder="Topic" style="width: 230px">
+						<input type="text" value="${topicVO.name}" placeholder="Topic" style="width: 230px">
 					</div><!--./searchBox-->
 					<div class="col-xs-4 col-md-4"><!--button-->
 						<button class="pull-right">Save</button>
@@ -46,20 +53,22 @@
 			<span class=" glyphicon glyphicon-file envIcon"></span>
 			<span class=" glyphicon glyphicon-trash envIcon"></span>
 
-			<select class="form-control access pull-right" style="margin-left: 10px;background-color:#2aabd2; width: 30%">
-				<option value="">Profile</option>
-				<option value="">Post</option>
-				<option value="">Logout</option>
+			<select class="form-control access pull-right"  style="margin-left: 10px; width: 30%">
+				<option value="">SERIOUS</option>
+				<option value="">VERY_SERIOUS</option>
+				<option value="">CASUAL</option>
 			</select><!--/.access-->
 
-			<select class="form-control access pull-right" style="margin-left: 10px;background-color:#2aabd2; width: 30%">
-				<option value="">Profile</option>
-				<option value="">Post</option>
-				<option value="">Logout</option>
+			<select class="form-control access pull-right" style="margin-left: 10px; width: 30%">
+				<option value="">PUBLIC</option>
+				<option value="">PRIVATE</option>
 			</select><!--/.serious-->
 		</div>
 	</div>
 	<br/>
+	</g:if>
+
+	</g:each>
 	<div class="panel-footer">
 
 	</div>

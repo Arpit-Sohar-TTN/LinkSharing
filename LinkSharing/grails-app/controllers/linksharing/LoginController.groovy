@@ -30,13 +30,13 @@ class LoginController {
                     redirect(controller: 'user', action: 'index')
                 } else {
                     log.error("User is not active")
-                    flash.loginError = "User is not active"
+                    flash.singleError = "User is not active"
                     redirect(controller: 'login', action: 'index')
                 }
 
             }else {
                     log.error("User not exist in database")
-                    flash.loginError = "Wrong Username or Password"
+                    flash.singleError = "Wrong Username or Password"
                 redirect(controller: 'login', action: 'index')
 
 
@@ -50,13 +50,7 @@ class LoginController {
             println 'logout called'
         }
 
-//            log.info user
-//   Hit the url        http://localhost:8080/login/register?firstName=Jay&lastName=Saini&userName=Jay&email=jay.saini@ttn.com&password=jaysaini&confirmPassword=jaysaini
-        def register(UserCO userCO) {
-//            def user = new User(params)       1st way of binding data
-
-//            User user  = new User()           2nd way of binding data
-//            user.properties = params
+      def register(UserCO userCO) {
             User user = new User()
             bindData(user,userCO)
             println user
@@ -79,3 +73,6 @@ class LoginController {
 
     }
 
+//            def user = new User(params)       1st way of binding data
+//            User user  = new User()           2nd way of binding data
+//            user.properties = params

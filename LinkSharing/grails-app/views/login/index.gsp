@@ -7,8 +7,15 @@
 </head>
 <body>
 <div class="col-md-7 col-xs-12">
-	<g:render template="/login/recentShare" model="[recentShares: recentShares]" />
-<g:render template="/login/topPost" model="[topPosts: topPosts]"/>
+	<div class="panel-heading">
+		<h3 class="panel-title">Recent Shares</h3>
+	</div>
+	<g:render template="/login/Post" model="[topPosts: recentShares]" />
+
+	<div class="panel-heading">
+		<h3 class="panel-title">Top Post</h3>
+	</div>
+<g:render template="/login/Post" model="[topPosts: topPosts]"/>
 </div>
 <div class="col-md-5 col-xs-12">
 <g:render template="/login/login"/>

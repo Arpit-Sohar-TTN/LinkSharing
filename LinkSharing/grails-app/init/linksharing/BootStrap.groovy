@@ -88,8 +88,11 @@ class BootStrap {
             if (countResources<1) {
                 2.times {
                     Resource linkResource = new LinkResource(topic: topic,createdBy: topic.createdBy,description: "${descriptionContent}",url: "https://www.google.co.in")
+                    ReadingItem readingLinkResource = new ReadingItem(user: topic.createdBy,isRead: true,resource: linkResource)
                     Resource documentResource = new DocumentResource(topic: topic,createdBy: topic.createdBy,description: "${descriptionContent}",filePath: "/home/arpit/")
+                    ReadingItem readingDocumentResource = new ReadingItem(user: topic.createdBy,isRead: true,resource: documentResource)
                     if (linkResource.save(flush:true,failOnError:true)) {
+                        readingLinkResource.save(flush:true)
                         log.info("Link Resource save")
                     }
                     else
@@ -97,11 +100,12 @@ class BootStrap {
                         log.error("Error in link Resource ${linkResource.errors.allErrors}")
                     }
                     if (documentResource.save(flush:true,failOnError:true)) {
+                        readingDocumentResource.save(flush:true)
                         log.info("Document Resource save")
                     }
                     else
                     {
-                        log.error("Error in dpcument Resource ${documentResource.errors.allErrors}")
+                        log.error("Error in document Resource ${documentResource.errors.allErrors}")
                     }
                 }
             }
@@ -162,12 +166,20 @@ class BootStrap {
 */
 
     def createReadingItems() {
+        boolean toggleIsRead = true
         def resources = Resource.all
         def users = User.all
         resources.each { resource->
             users.each { user->
                 if (!(ReadingItem.findByUserAndResource(user,resource))&& (user!=resource.createdBy)) {
-                    ReadingItem readingItem = new ReadingItem(user: user,resource: resource,isRead: true)
+                    ReadingItem readingItem = new ReadingItem(user: user,resource: resource,isRead: toggleIsRead)
+                    if (toggleIsRead) {
+                        readingItem.isRead = false
+                        toggleIsRead = false
+                    } else {
+                        readingItem.isRead = true
+                        toggleIsRead = true
+                    }
                     if (readingItem.save(flush:true,failOnError:true)) {
                         log.info("${resource} read by ${user}")
                     } else

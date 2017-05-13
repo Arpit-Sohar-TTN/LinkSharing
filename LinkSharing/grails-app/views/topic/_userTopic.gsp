@@ -1,6 +1,6 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 class="panel-title">User :"Grails" </h4>
+	<div class="panel-heading" style="height: 60px;">
+		<h4 class="panel-title" style="font-size: large;">User :"Grails" </h4>
 	</div>
 	<g:each in="${subscribedUsers}" var="subscribedUser">
 
@@ -13,7 +13,7 @@
 		<div class="col-md-9 col-xs-12 center-block">
 			<div class="row"><!--username-->
 				<div class="col-xs-6 col-md-6"><!--username-->
-					<b class=""></b> <i>@${subscribedUser.user.userName}</i>
+					<b class=""></b> <g:link controller="user" action="showProfile" params="[userName:subscribedUser.user.userName]"><i>@${subscribedUser.user.userName}</i></g:link>
 				</div><!--./username-->
 			</div><!--/.username-->
 			<div><!--content-->

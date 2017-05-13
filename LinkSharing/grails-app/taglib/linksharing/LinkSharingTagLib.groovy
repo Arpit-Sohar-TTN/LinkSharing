@@ -9,25 +9,31 @@ class LinkSharingTagLib {
     def isRead = { attrs, body ->
         User user = session.user
         if (user) {
-            println attrs.resource
             Long id = attrs.resource.id
             Resource resource = Resource.findById(id)
             if (resource) {
-                ReadingItem readingItem = ReadingItem.findByResourceAndIsReadAndUser(resource, true, user)
+                ReadingItem readingItem = ReadingItem.findByUserAndResource(user,resource)
                 if (readingItem) {
-                    out << "<a href='${createLink(controller: 'readingItem', action: 'toggleIsRead', id: resource.id)}'>Mark as Un Read</a> "
-                } else {
+                    println readingItem
+                if (readingItem.isRead == false) {
                     out << "<a href='${createLink(controller: 'readingItem', action: 'toggleIsRead', id: resource.id)}'>Mark as Read</a> "
                 }
+            }
             }
         }
     }
     def trendingTopics = { attrs,body ->
         User user = session.user
         List<TopicVO> topicVOList = Topic.getTrendingTopics()
-        out << render(template:'trendingTopic', model:[topic:topicVOList])
+        out << render(template:'/user/trendingTopic', model:[topic:topicVOList])
 
     }
+
+    def post = {attrs,body ->
+
+
+    }
+
 
 
 }

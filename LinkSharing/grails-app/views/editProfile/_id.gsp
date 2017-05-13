@@ -8,7 +8,8 @@
 		<div class="col-md-9 col-xs-12 center-block">
 			<div class="row"><!--username-->
 				<div class="col-xs-6 col-md-6"><!--username-->
-					<b class="">${user}</b> <i>@${user.userName}</i>
+					<b class="">${userVO.firstName}   ${userVO
+					.lastName}</b> <i>@${userVO.userName}</i>
 				</div><!--./username-->
 			</div><!--/.username-->
 			<div><!--content-->

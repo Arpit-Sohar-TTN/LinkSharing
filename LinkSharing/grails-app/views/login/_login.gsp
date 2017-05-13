@@ -28,7 +28,7 @@
                             </div>
 
                             <div class="form-group ">
-                                <input  value="Login" type="submit" id="button1" class="btn btn-primary btn-lg btn-block login-button "/>
+                                <input  value="Login" type="submit" id="button1" class="btn btn-success btn-block "/>
                             </div>
 
                         </form>

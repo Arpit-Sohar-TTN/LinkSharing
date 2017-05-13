@@ -14,6 +14,7 @@ class ResourceVO {
     Topic topic
     String path
     int rateCount
+    Boolean isRead
 
     @Override
     public String toString() {

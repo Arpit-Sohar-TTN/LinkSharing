@@ -6,15 +6,16 @@ class ReadingItemController {
     def toggleIsRead(Long id) {
         User user = session.user
         Resource resource = Resource.findById(id)
-        ReadingItem readingItem = ReadingItem.findByUser(user)
+        ReadingItem readingItem = ReadingItem.findByUserAndResource(user,resource)
         println readingItem
         if (readingItem.isRead) {
-            readingItem.delete()
+            readingItem.isRead=false
+            readingItem.save(flush:true)
             redirect (controller:'user',action:'index')
         }
         else {
-            ReadingItem readingItem1 = new ReadingItem(user: user,isRead: true,resource: resource)
-            readingItem1.save(flush:true)
+            readingItem.isRead=true
+            readingItem.save(flush:true)
             redirect (controller:'user',action:'index')
 
         }

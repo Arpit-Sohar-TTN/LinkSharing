@@ -25,7 +25,7 @@
 
                     <div class="row"><!--content-->
                         <div class="col-xs-4 col-md-4"><!--button-->
-                        @${session.user.userName} <br/>
+                        @${trendingTopic.createdBy.userName} <br/>
                     <g:if test="${trendingTopic.isLoggedInUserSubscribed}">
                             <a>unsbscribe</a>
                     </g:if>

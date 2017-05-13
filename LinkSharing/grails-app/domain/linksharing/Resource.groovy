@@ -7,7 +7,7 @@ import com.ttn.vo.ResourceVO
 abstract class Resource {
     User createdBy
     String description
-    Topic topic
+
     Date dateCreated
     Date lastUpdated
     def ratingInfo

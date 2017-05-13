@@ -4,6 +4,8 @@ import com.ttn.co.DocumentResourceCO
 import com.ttn.co.LinkResourceCO
 import com.ttn.co.ResourceSearchCO
 import com.ttn.util.Constants
+import com.ttn.vo.RatingInfoVO
+import com.ttn.vo.ResourceVO
 
 class ResourceController {
 
@@ -50,7 +52,7 @@ class ResourceController {
 
 //        linkResource.createdBy = user
 //        linkResource.topic = Topic.get(2)
-        if (linkResource.save(flush: true,failOnError:true)) {
+        if (linkResource.save(flush: true)) {
             flash.message = "Link Resource Saved"
         } else {
             flash.error = "Fail to save resource"
@@ -71,5 +73,12 @@ class ResourceController {
             flash.error = "Fail to save resource"
         }
         redirect(controller:'user',action:'index')
+    }
+
+    def showPost() {
+        String id = params.id
+        Resource resource = Resource.get(id.toInteger())
+        RatingInfoVO ratingInfoVO = Resource.getRatingInfo(id.toLong())
+        render view:'index',model: [resource:resource,ratingInfoVO:ratingInfoVO]
     }
 }

@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-	<div class="panel-heading" style="height: 50px;">
+	<div class="panel-heading" style="height: 60px;">
 		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Post: Grails </h4>
 		<div class="input-group pull-right" style="margin-right: -100px; margin-top: -5px">
 			<input type="text" name="focus" required class="search-box" placeholder="Search" style="width: 50%;margin-right:0px"/>
@@ -24,23 +24,15 @@
 						<span class="fa fa-facebook"></span>
 						<span class="fa fa-twitter" style="padding-left: 10px"></span>
 						<span class="fa fa-google-plus" style="padding-left: 10px"></span>
-						<!--</a>
-                                <a class="btn btn-social-icon btn-twitter">
-                                    <span class="fa fa-twitter"></span>
-                                </a>
-                                <a class="btn btn-social-icon btn-google">
-                                    <span class="fa fa-google-plus"></span>-->
+
 					</a>
 				</div><!--./socialConnect-->
-				<div class="col-xs-4 col-md-4" ><!--viewPost-->
-					<span><a href="#" class=" viewPost"> Download</a></span><br/><br/>
-					<span><a href="#" class=" viewPost"> View Full Size</a></span>
-				</div>
-				<div class="col-xs-4 col-md-4" >
-					<span><a href="#" class=" viewPost"> Mark as Read</a></span><br/><br/>
-					<span><a href="#" class=" viewPost"> View Post</a></span>
-				</div><!--./viewPost-->
-			</div><!--/.import link-->
+			<br>
+			<span><a href="#" class=" viewPost"> Download</a></span>
+			<span><a href="#" class=" viewPost"> View Full Size</a></span>
+			<span><g:link controller="resource" action="showPost" params="[id:resource.id]" class=" viewPost"> View Post</g:link></span>
+
+		</div><!--/.import link-->
 		</div>
 	</div>
 	</g:each>

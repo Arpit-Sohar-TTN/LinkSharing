@@ -1,5 +1,5 @@
 <div class="panel panel-default"><!--topPosts-->
-	<div class="panel-heading" style="height: 50px;">
+	<div class="panel-heading" style="height: 60px;">
 		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Topic :"Grails" </h4>
 		<div class="input-group pull-right" style="margin-right: -100px; margin-top: -5px">
 			<input type="text" name="focus" required class="search-box" placeholder="Search" style="width: 50%;margin-right:0px"/>
@@ -11,7 +11,8 @@
 		<div class="row">
 			<div class="col-md-3 col-xs-12">
 				<img class="img-rounded img-responsive center-block profileImage"
-					 src="../assets/iconProfile.png">
+					 src="../assets/iconProfile.png"/>
+				%{--<g:img dir="images" file="iconProfile"></g:img>--}%
 			</div>
 
 			<div class="col-md-9 col-xs-12 center-block">
@@ -21,7 +22,7 @@
 				</div>
 				<div class="row"><!--username-->
 					<div class="col-xs-3 col-md-3"><!--username-->
-						<i>@${topic.createdBy.userName}</i><br/><a>Subscribe</a>
+					<g:link controller="user" action="showProfile" params="[userName:topic.createdBy.userName]"><i>@${topic.createdBy.userName}</i></g:link>	<br/><a>Subscribe</a>
 					</div><!--./username-->
 
 					<div class="col-xs-3 col-md-3 center-block"><!--socialConnect-->
@@ -29,8 +30,7 @@
 					</div><!--./socialConnect-->
 					<div class="col-xs-3 col-md-3 pull-right"><!--viewPost-->
 						<a href="#" class=" viewPost"> Posts <br/> ${topic.resources.size()}</a>
-					</div><!--./viewPost-->
-
+					</div>
 				</div><!--/.username-->
 
 			</div>

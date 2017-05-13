@@ -6,14 +6,10 @@
     -o-background-size: cover;
     background-size: cover;
 }*/
-/*body{
-    background-image: url("../assets/back2.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: crimson;
-}*/
+body{
+
+    background-color: #faf3f0!important;
+}
 /*./background*/
 /*
 @font-face {
@@ -40,7 +36,7 @@
 
 /*searchbox*/
 h1 {
-    color: green;
+    color: #74af7b;
     text-align: center;
 }
 .redfamily {
@@ -92,7 +88,7 @@ h1 {
     color: white;
     font-weight: normal;
     font-size: 12px;
-    box-shadow: 0 0 2px #E50F0F;
+    box-shadow: 0 0 2px #ba5d6e;
     cursor: pointer;
 }
 .search-box:not(:valid) ~ .close-icon {
@@ -223,8 +219,8 @@ h1 {
 
 .btn-primary {
     color: #fff;
-    background-color: red;
-    border-color: red;
+    background-color: #ba5d6e;
+    border-color: #ba5d6e;
 }
 
 .btn-primary:hover,
@@ -233,8 +229,8 @@ h1 {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: red;
-    border-color: red;
+    background-color: #ba5d6e;
+    border-color: #ba5d6e;
 }
 
 
@@ -247,7 +243,7 @@ h1 {
 }
 .btn-primary.outline {
     border: 0px solid #0099cc;
-    color: #419641;
+    color: #74af7b;
 }
 .btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
     color: #33a6cc;
@@ -288,15 +284,23 @@ h1 {
 }
 
 .panel-heading{
-    background : #9acfea !important;;
+    background : #ace3aa !important;;
 }
 
 input[type="text"],input[type="password"]{
-    background-color:#66afe9 !important;
-    color: red;
+
 }
     .form-control::-webkit-input-placeholder { color: white; }
 .form-control:-moz-placeholder { color: white; }
 .form-control::-moz-placeholder { color: white; }
 .form-control:-ms-input-placeholder { color: white; }
 
+#main-dropdown {
+background-color: white;
+;
+}
+/*.nav{
+    background-color: #ace3aa !important;
+    color: #ace3aa !important;
+}*/
+navbar-default { background-color: #EF6E73; border-color: #E7E7E7; }

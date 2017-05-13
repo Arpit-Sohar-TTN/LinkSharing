@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="cols-sm-2 control-label namingLabels">Password</label>
+                                <label for= class="cols-sm-2 control-label namingLabels">Password</label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="form-group ">
-                                <input  value="Register" type="submit" id="button1" class="btn btn-primary btn-lg btn-block login-button "/>
+                                <input  value="Register" type="submit" id="button1" class="btn btn-success btn-block login-button "/>
 
                             </div>
 

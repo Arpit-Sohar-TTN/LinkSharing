@@ -7,24 +7,30 @@
 			<label class="glyphicon glyphicon-search redfamily searchIcon" rel="tooltip" title="Search"></label>
 		</div>
 	</div>
+<g:each in="${userVO.topicSubscriptionList}" var="topic">
+<g:if test="${topic.visibility==linksharing.Visibility.PUBLIC}">
+
+
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-12 col-xs-12 center-block">
 					<div class="col-xs-7 col-md-7 center-block"><!--socialConnect-->
-					grails<br/><span class="glyphicon glyphicon-envelope envIcon" style=""></span>
+					${topic.name}<br/><span class="glyphicon glyphicon-envelope envIcon" style=""></span>
 
 						<select class="form-control whySoSerious pull-left" style="width: 70%;background-color: rgba(0,0,0,0.15);">
-							<option value="">Serious</option>
-							<option value="">very-Serious</option>
-							<option value="">Casual</option>
+							<option value="">SERIOUS</option>
+							<option value="">VERY_SERIOUS</option>
+							<option value="">CASUAL</option>
 						</select>
 					</div><!--./socialConnect-->
 					<div class="col-xs-3 col-md-3 center-block"><!--socialConnect-->
-					Subscriptions<br/>60
+					Subscriptions<br/>${topic.noOfSubscribedUsers}
 					</div><!--./socialConnect-->
 					<div class="col-xs-2 col-md-2 pull-right"><!--viewPost-->
-						<a href="#" class=" viewPost"> Topics <br/> 30</a>
+						<a href="#" class=" viewPost"> Topics <br/> ${topic.count}</a>
 					</div><!--./viewPost-->
 			</div>
 		</div>
 	</div>
+</g:if>
+</g:each>

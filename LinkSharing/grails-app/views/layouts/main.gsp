@@ -23,7 +23,7 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-default "style="background-color:cornflowerblue;margin-bottom: 20px ">
+<nav class="navbar navbar-default "style="background-color:#ace3aa;margin-bottom: 20px ">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -36,7 +36,7 @@
                 <asset:image src="logo.png" class="logo pull-left" style = "height: 35px;width: 50px"></asset:image>
             </a>--}%
             <asset:image src="logo.png" class="logo pull-left" style = "height: 45px;width: 40px;padding-top: 10px"></asset:image>
-            <a class="navbar-brand" href="#" style="padding-left: 30px">Link Sharing</a>
+            <a class="navbar-brand" href="/user/index" style="padding-left: 30px">Link Sharing</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -46,21 +46,23 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><span class="caret"></span> &nbsp; User</a>
-                    <ul class="dropdown-menu">
+                    <ul id="main-dropdown" class="dropdown-menu">
+                        <g:if test="${session.user.isAdmin   == true}">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>
-                        <li><a href="#">Profile</a></li>
+                        </g:if>
+                        <li><g:link controller="user" action="editProfile">Profile</g:link></li>
                         <li role="separator" class="divider"></li>
                         <li><g:link controller="login" action="logout">Logout</g:link></li>
                     </ul>
                 </li>
 </g:if>
             </ul>
-            <form class="navbar-form navbar-right" style="margin-right: 10px">
+            <form class="navbar-form navbar-right" style="margin-right: 10px" >
                 <div class="input-group" style="">
-                    <input type="text" name="focus" required class="search-box" placeholder="Search" style="width: 50%;"/>
+                    <input type="text" name="focus"  required class="search-box" placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
                     <button class="close-icon redfamily" type="reset"></button>
-                    <label class="glyphicon glyphicon-search redfamily searchIcon" rel="tooltip" title="Search"></label>
+                    <label  class="glyphicon glyphicon-search redfamily searchIcon"  rel="tooltip" title="Search"></label>
 
 
 <g:if test="${session.getAttribute('user')}">
@@ -80,13 +82,13 @@
     <!-- /.container -->
 </nav>
 <!-- /.navbar -->
-<g:if test="${flash.loginError}" style="margin-left: 50px;margin-right: 500px">
+<g:if test="${flash.singleError}" style="margin-left: 50px;margin-right: 500px">
     <div class="alert alert-danger" id="successMessage" style="text-align: center">
-        <strong>${flash.loginError}</strong>
+        <strong>${flash.singleError}</strong>
     </div>
 </g:if>
 
-<g:if test="${flash.error}" style="margin-left: 50px;margin-right: 500px">
+<g:if test="${flash.error && flash.error.size()>1}" style="margin-left: 50px;margin-right: 500px">
     <div class="alert alert-danger" id="errorMessage" style="text-align: center">
         <g:each in="${flash.error}">
             <strong>${it}</strong>
@@ -102,7 +104,7 @@
 
 <g:layoutBody/>
 
-    <div class="footer" role="contentinfo"  style="height: 50px;color: black;background-color: #2e6da4;position: relative;bottom:0;left:0;right:0;padding-top: 10px">
+    <div class="footer" role="contentinfo"  style="height: 50px;color: black;background-color:  #ace3aa !important;position: relative;bottom:0;left:0;right:0;padding-top: 10px">
     %{--&copy;TO The New
     </div>--}%
     <g:render template="/user/modalSendInvitation"></g:render>

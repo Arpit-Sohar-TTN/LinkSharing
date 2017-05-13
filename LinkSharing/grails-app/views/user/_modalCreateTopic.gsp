@@ -17,8 +17,8 @@
 					<div class="col-xs-6">
 						<input type="text" name="topicName" required placeholder="Name"  style="background-color: transparent !important;color: black !important;height: 25px;width: 65%" /> <br/><br/>
 						<select form="form1" name="visibility"  optionKey="id" optionValue="name" >
-						<option value="">${linksharing.Visibility.PUBLIC}</option>
-							<option value="">${linksharing.Visibility.PRIVATE}</option>
+						<option value="PUBLIC">PUBLIC</option>
+							<option value="PRIVATE">PRIVATE</option>
 
 						</select>
 					</div>

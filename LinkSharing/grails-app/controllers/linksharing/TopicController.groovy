@@ -82,7 +82,9 @@ class TopicController {
 
     }*/
     def save(String topicName,String visibility) {
+        println visibility+"----------------"
         Visibility visibility1 = Visibility.stringtoEnum(visibility)
+        println visibility1
         User user = session.getAttribute('user')
         if (user) {
             Topic topic =  new Topic(topicName: topicName,createdBy: user,visibility: visibility1)

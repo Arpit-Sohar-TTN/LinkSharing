@@ -13,12 +13,12 @@ class UserCO implements Validateable {
     String lastName
     String email
     String password
-    Byte[] image
+    File image
     boolean isAdmin
     boolean isActive
     Date dateCreated
     Date lastUpdated
     String confirmPassword
- static constraints ={email email: true, nullable: false, unique: true, blank: false}
+// static constraints ={email email: true, unique: true, blank: false}
 
 }
