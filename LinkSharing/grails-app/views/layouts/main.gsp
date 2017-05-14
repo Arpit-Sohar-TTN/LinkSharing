@@ -66,7 +66,7 @@
                         <input type="text" name="q"   class="search-box" id="newer-txtbox"
                            placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
 
-                    <button class="close-icon redfamily" type="reset"></button>
+
                     <label  class="glyphicon glyphicon-search redfamily searchIcon"  rel="tooltip" title="Search"></label>
                     %{--<input type="submit" value="search"/>--}%
 
