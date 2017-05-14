@@ -34,7 +34,7 @@
                                 </a>
                             </div><!--./socialConnect-->
                             <div class="col-xs-6 col-md-6"><!--viewPost-->
-                                <a href="#" class="pull-right viewPost"> View Post</a>
+                    <g:link controller="resource" action="showPost" params="[id:post.id]" class=" viewPost"> View Post</g:link>
                             </div><!--./viewPost-->
                         </div><!--/.import link-->
                     </div>

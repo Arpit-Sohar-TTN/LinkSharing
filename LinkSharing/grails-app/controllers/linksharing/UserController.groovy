@@ -1,6 +1,7 @@
 package linksharing
 
 import com.ttn.co.SearchCO
+import com.ttn.co.TopicCO
 import com.ttn.co.UserCO
 import com.ttn.util.Constants
 import com.ttn.vo.TopicVO
@@ -29,12 +30,17 @@ class UserController {
         params.max=5
         params.offset=0
         User user = session.getAttribute('user')
-        List<TopicVO> trendingTopics = Topic.getTrendingTopics()
-        UserVO userVO = userService.getUserVO(user)
+        if (user) {
+            List<TopicVO> trendingTopics = Topic.getTrendingTopics()
+            UserVO userVO = userService.getUserVO(user)
 
-        println userVO.resourceVOList
-        List subscribedTopic = User.getSubscribedTopic(user)
-        render('view': 'index', model: [user: user, trendingTopics: trendingTopics, userVO: userVO, subscribedTopic: subscribedTopic])
+            println userVO.resourceVOList
+            List subscribedTopic = User.getSubscribedTopic(user)
+            render('view': 'index', model: [user: user, trendingTopics: trendingTopics, userVO: userVO, subscribedTopic: subscribedTopic])
+        }
+        else {
+            redirect(controller: 'login',action: 'index')
+        }
     }
 
     def inbox(SearchCO searchCO) {
@@ -172,5 +178,45 @@ class UserController {
         UserVO userVO = userService.getUserVO(user)
         render view:'showProfile',model: [userVO:userVO]
 
+    }
+
+    def toggleIsSubscribe(Long id) {
+        Topic topic = Topic.get(id)
+        User user = session.user
+        Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+        if (subscription==null) {
+            Subscription subscription1 = new Subscription(topic: topic,user: user,seriousness: Constants.defaultSeriousness)
+            subscription1.save(flush:true,floatOnErro:true)
+            redirect(controller: 'user',action: 'index')
+        }
+        else {
+            subscription.delete(flush: true)
+            redirect(controller: 'user',action: 'index')
+
+        }
+    }
+    def editTopic(TopicCO topicCO,String seriousness) {
+        User user = session.user
+        println topicCO
+        topicCO.createdBy=user
+        Topic topic = Topic.findByCreatedByAndId(user,topicCO.id)
+        bindData(topic,topicCO)
+        println topic
+        if (topic.save(flush:true,floatOnError:true)) {
+            Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+            if (subscription){
+                subscription.seriousness = Seriousness.convertIntoEnum(seriousness)
+              if ( subscription.save(flush:true)) {
+                flash.message="Topic ${topic} edited successfully"
+                redirect(controller: 'user',action: 'index')
+            }else {
+                  flash.error="Topic edit seriousness is default"
+                  redirect(controller: 'user',action: 'index')
+              }}
+
+        }else {
+            flash.error="Topic ${topic} cannot be edit"
+            redirect(controller: 'user',action: 'index')
+        }
     }
 }

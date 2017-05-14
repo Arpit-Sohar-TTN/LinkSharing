@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading" style="height: 60px;">
-		<h4 class="panel-title" style="font-size: large;">User :"Grails" </h4>
+		<h4 class="panel-title" style="font-size: large;">User :${topic.topicName} </h4>
 	</div>
 	<g:each in="${subscribedUsers}" var="subscribedUser">
 

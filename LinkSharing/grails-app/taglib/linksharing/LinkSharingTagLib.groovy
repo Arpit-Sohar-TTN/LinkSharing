@@ -29,8 +29,17 @@ class LinkSharingTagLib {
 
     }
 
-    def post = {attrs,body ->
-
+    def isSubscribe = {attrs,body ->
+        User user = session.user
+        Long id = attrs.id
+        Topic topic = Topic.get(id)
+        Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+        if (subscription) {
+            out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Unsubscribe</a> "
+        }
+        else {
+            out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Subscribe</a> "
+        }
 
     }
 

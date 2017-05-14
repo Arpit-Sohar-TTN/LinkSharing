@@ -18,20 +18,21 @@
                 <div class="col-md-9 col-xs-12 center-block">
                     <div class="row"><!--username-->
                         <div class="col-xs-3 col-md-3"><!--username-->
-                            <i>${trendingTopic.name}</i>
-                        </div><!--./username-->
+                        <g:link controller="topic" action="showTopic" id="${trendingTopic.id}"><b>${trendingTopic.name}</b> </g:link>
+                    </div><!--./username-->
                     </div><!--/.username-->
                     <br/>
 
                     <div class="row"><!--content-->
                         <div class="col-xs-4 col-md-4"><!--button-->
                         @${trendingTopic.createdBy.userName} <br/>
-                    <g:if test="${trendingTopic.isLoggedInUserSubscribed}">
+                   %{-- <g:if test="${trendingTopic.isLoggedInUserSubscribed}">
                             <a>unsbscribe</a>
                     </g:if>
                         <g:if test="${!trendingTopic.isLoggedInUserSubscribed}">
                             <a>subscribe</a>
-                        </g:if>
+                        </g:if>--}%
+                        <ls:isSubscribe id="${trendingTopic.id}"/>
 
 
                     </div><!--./button-->

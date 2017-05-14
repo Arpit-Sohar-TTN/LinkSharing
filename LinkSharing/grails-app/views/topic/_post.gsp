@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading" style="height: 60px;">
-		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Post: Grails </h4>
+		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Post: ${topic.topicName} </h4>
 		<div class="input-group pull-right" style="margin-right: -100px; margin-top: -5px">
 			<input type="text" name="focus" required class="search-box" placeholder="Search" style="width: 50%;margin-right:0px"/>
 			<button class="close-icon redfamily" type="reset"></button>

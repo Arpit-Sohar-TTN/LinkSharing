@@ -1,6 +1,6 @@
 <div class="panel panel-default"><!--topPosts-->
 	<div class="panel-heading" style="height: 60px;">
-		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Topic :"Grails" </h4>
+		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Topic :${topic.topicName} </h4>
 		<div class="input-group pull-right" style="margin-right: -100px; margin-top: -5px">
 			<input type="text" name="focus" required class="search-box" placeholder="Search" style="width: 50%;margin-right:0px"/>
 			<button class="close-icon redfamily" type="reset"></button>
@@ -22,7 +22,9 @@
 				</div>
 				<div class="row"><!--username-->
 					<div class="col-xs-3 col-md-3"><!--username-->
-					<g:link controller="user" action="showProfile" params="[userName:topic.createdBy.userName]"><i>@${topic.createdBy.userName}</i></g:link>	<br/><a>Subscribe</a>
+					<g:link controller="user" action="showProfile" params="[userName:topic.createdBy.userName]"><i>@${topic.createdBy.userName}</i></g:link>	<br/>
+					<ls:isSubscribe id="${topic.id}"/>
+
 					</div><!--./username-->
 
 					<div class="col-xs-3 col-md-3 center-block"><!--socialConnect-->

@@ -81,4 +81,34 @@ class ResourceController {
         RatingInfoVO ratingInfoVO = Resource.getRatingInfo(id.toLong())
         render view:'index',model: [resource:resource,ratingInfoVO:ratingInfoVO]
     }
+    def ratePost(int resourceId,int score) {
+        User user = session.user
+        println score
+        Resource resource = Resource.get(resourceId)
+     /*   ResourceRating resourceRating1 = ResourceRating.findByUserAndResource(user,resource)
+        if (resourceRating1) {
+            resourceRating1.score = score
+            if (resourceRating1.save(flush:true,failOnError: true)) {
+                flash.message = "Resource Rating updated succcessfully"
+                redirect (controller: 'resource',action: 'showPost')
+            }
+            else {
+                flash.error = "Fail to rate resource try again after some time"
+                redirect (controller: 'resource',action: 'showPost')
+            }
+        } else {*/
+
+            ResourceRating resourceRating = new ResourceRating(user: user, resource: resource, score: score)
+
+            if (resourceRating.save(flush: true,failOnErro:true)) {
+                flash.message = "Resource Rated succcessfully"
+                forward action: "showPost", params: [id: "${resource.id}"]
+
+            } else {
+                flash.loginError = "Fail to rate resource try again after some time"
+                forward action: "showPost", params: [id: "${resource.id}"]
+
+            }
+
+    }
 }

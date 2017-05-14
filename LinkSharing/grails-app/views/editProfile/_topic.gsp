@@ -16,6 +16,7 @@
 
 
 	<div class="panel-body" style="padding: 10px">
+		<g:form controller="user" action="editTopic" name="editTopic">
 		<div class="row">
 			<div class="col-md-3 col-xs-12">
 				<img class="img-rounded img-responsive center-block profileImage"
@@ -37,12 +38,14 @@
 
 				</div><!--/.username-->
 				<br/>
+
 				<div class="row"><!--content-->
 					<div class="col-xs-8 col-md-8"><!--searchBox-->
-						<input type="text" value="${topicVO.name}" placeholder="Topic" style="width: 230px">
+				<g:hiddenField name="id" value="${topicVO.id}" />
+						<g:textField type="text" value="${topicVO.name}" name="topicName" placeholder="Topic" style="width: 230px"/>
 					</div><!--./searchBox-->
 					<div class="col-xs-4 col-md-4"><!--button-->
-						<button class="pull-right">Save</button>
+
 					</div><!--./button-->
 				</div><!--/.content-->
 				<br/>
@@ -53,17 +56,17 @@
 			<span class=" glyphicon glyphicon-file envIcon"></span>
 			<span class=" glyphicon glyphicon-trash envIcon"></span>
 
-			<select class="form-control access pull-right"  style="margin-left: 10px; width: 30%">
-				<option value="">SERIOUS</option>
-				<option value="">VERY_SERIOUS</option>
-				<option value="">CASUAL</option>
-			</select><!--/.access-->
+			<g:select class="form-control access pull-right"  style="margin-left: 10px; width: 30%" name="seriousness" from="${linksharing.Seriousness.getEnumConstants()}"/>
+				%{--<option value="${linksharing.Seriousness.SERIOUS}">SERIOUS</option>
+				<option value="${linksharing.Seriousness.VERY_SERIOUS}">VERY_SERIOUS</option>
+				<option value="${linksharing.Seriousness.CASUAL}">CASUAL</option>--}%
 
-			<select class="form-control access pull-right" style="margin-left: 10px; width: 30%">
-				<option value="">PUBLIC</option>
-				<option value="">PRIVATE</option>
-			</select><!--/.serious-->
+
+			<g:select from="${linksharing.Visibility.getEnumConstants()}" class="form-control access pull-right" style="margin-left: 10px; width: 30%" name="visibility"/>
+
 		</div>
+			<g:submitButton name="editTopic"  value="Save" class="pull-right"/>
+		</g:form>
 	</div>
 	<br/>
 	</g:if>

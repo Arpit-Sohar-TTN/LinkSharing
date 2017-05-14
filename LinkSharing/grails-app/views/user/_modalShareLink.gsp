@@ -17,7 +17,7 @@
 						<input type="text" name="url" required placeholder="Link"  style="background-color: transparent !important;color: black !important;height: 25px;width: 80%"/> <br/><br/>
 						<textarea required placeholder="Description" name="description" style="width: 80%" ></textarea><br/><br/>
 						<g:select from = '${subscribedTopic}' class="form-control" style="width: 80%" name="topic">
-							<option value="">Topic 1</option>
+
 
 						</g:select>
 					</div>

@@ -16,6 +16,7 @@
 	<g:render template="subscription"/>
 	%{--<g:render template="/dashboard/subscriptionProp"/>--}%
 	%{--<g:render template="trendingTopic"/>--}%
+
 	<ls:trendingTopics />
 	%{--<g:render template="/dashboard/trendingTopicProp"/>--}%
 </div>

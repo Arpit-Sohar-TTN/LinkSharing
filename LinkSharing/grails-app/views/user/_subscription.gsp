@@ -29,7 +29,7 @@
 				<br/>
 				<div class="col-xs-3 col-md-3"><!--username-->
 					<g:link controller="user" action="showProfile" params="[userName:subscribedTopic.createdBy.userName]">	<i>@${subscribedTopic.createdBy}</i></g:link>
-					<i><a href="">Unsubscribe</a></i>
+					<i><ls:isSubscribe id="${subscribedTopic.id}"/></i>
 
 				</div><!--./username-->
 

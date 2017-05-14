@@ -11,7 +11,7 @@ import javax.validation.Valid
  */
 
 class TopicCO implements Validateable{
-
+    Long id
     String topicName
     User createdBy
     Date dateCreated

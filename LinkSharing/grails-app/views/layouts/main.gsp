@@ -60,7 +60,8 @@
             </ul>
             <form class="navbar-form navbar-right" style="margin-right: 10px" >
                 <div class="input-group" style="">
-                    <input type="text" name="focus"  required class="search-box" placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
+                    <input type="text" name="focus"  required class="search-box" id="newer-txtbox" placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
+                    <g:hiddenField name="hiddenField" value="hiddenField"></g:hiddenField>
                     <button class="close-icon redfamily" type="reset"></button>
                     <label  class="glyphicon glyphicon-search redfamily searchIcon"  rel="tooltip" title="Search"></label>
 
