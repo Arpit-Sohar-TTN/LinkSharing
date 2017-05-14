@@ -6,14 +6,17 @@
 	<title>Login Page</title>
 </head>
 <body>
-<div class="col-md-7 col-xs-12">
-	%{--<g:render template="/login/recentShare" model="[recentShares: recentShares]" />--}%
-<g:render template="/login/Post" model="[topPosts: topPosts]"/>
-	<ls:trendingTopics />
-</div>
 <div class="col-md-5 col-xs-12">
-<g:render template="/login/login"/>
-<g:render template="/login/register"/>
+	%{--<g:render template="/login/recentShare" model="[recentShares: recentShares]" />--}%
+	<ls:trendingTopics />
+	<div class="panel-heading" style="height: 60px;">
+		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Top Posts</h4>
+	</div>
+<g:render template="/login/Post" />
+
+</div>
+<div class="col-md-7 col-xs-12">
+	<g:render template="searchResults"/>
 </div>
 </body>
 </html>

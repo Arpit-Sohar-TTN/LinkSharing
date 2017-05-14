@@ -76,10 +76,18 @@ class ResourceController {
     }
 
     def showPost() {
-        String id = params.id
-        Resource resource = Resource.get(id.toInteger())
-        RatingInfoVO ratingInfoVO = Resource.getRatingInfo(id.toLong())
-        render view:'index',model: [resource:resource,ratingInfoVO:ratingInfoVO]
+        User user = session.user
+        if (user) {
+            String id = params.id
+            Resource resource = Resource.get(id.toInteger())
+            RatingInfoVO ratingInfoVO = Resource.getRatingInfo(id.toLong())
+            render view:'index',model: [resource:resource,ratingInfoVO:ratingInfoVO]
+        }
+        else {
+            flash.message="Please Signup first"
+            redirect(controller: 'login',action: 'index')
+        }
+
     }
     def ratePost(int resourceId,int score) {
         User user = session.user

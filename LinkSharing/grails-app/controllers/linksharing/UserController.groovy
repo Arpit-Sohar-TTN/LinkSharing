@@ -4,6 +4,7 @@ import com.ttn.co.SearchCO
 import com.ttn.co.TopicCO
 import com.ttn.co.UserCO
 import com.ttn.util.Constants
+import com.ttn.vo.ResourceVO
 import com.ttn.vo.TopicVO
 import com.ttn.vo.UserVO
 import grails.converters.JSON
@@ -218,5 +219,24 @@ class UserController {
             flash.error="Topic ${topic} cannot be edit"
             redirect(controller: 'user',action: 'index')
         }
+    }
+
+    def search(String q) {
+        List<ResourceVO> topPosts = Resource.topPost()
+       List<Resource> resourceList = Resource.all
+        List<Topic> topicList = Topic.all
+        List<Resource> resultResources =[]
+        List<Topic> resultTopics = []
+        resourceList.each {resource->
+            if (resource.description.contains(q)&&resource.topic.visibility==Visibility.PUBLIC) {
+                resultResources.add(resource)
+            }
+        }
+        topicList.each {topic->
+            if (topic.topicName.contains(q)&&topic.visibility==Visibility.PUBLIC) {
+                resultTopics.add(topic)
+            }
+        }
+        render view:'search',model: [topPosts:topPosts,resources:resultResources,topics:resultTopics,q:q]
     }
 }

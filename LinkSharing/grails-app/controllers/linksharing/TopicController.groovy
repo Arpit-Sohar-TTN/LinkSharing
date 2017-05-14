@@ -26,6 +26,7 @@ class TopicController {
             render view:'topicShow',model: [topic:topic]
 
         } else {
+            flash.message="Please Signup First"
             redirect(controller: 'login',action: 'index')
         }
         println topic
@@ -34,53 +35,6 @@ class TopicController {
 
     }
 
-
-/*    def save(TopicCO topicCO,String seriousness) {
-        User user = session?.getAttribute('user')
-        if (user) {
-
-            topicCO.createdBy = user
-            topicCO.visibility = Visibility.PUBLIC
-            Topic topic =  new Topic()
-            bindData(topic,topicCO,[include:['topicName','visibility']])
-            User user1 = User.findByUserName(user.userName)
-            user1.addToTopics(topic)
-            seriousness = "SERIOUS"
-            println topic
-            println user1
-           if( topicService.topicSave(topic,user1,Seriousness.convertIntoEnum(seriousness))){
-
-               flash.message = "Success ! ${topic} has been saved by ${user}"
-                forward(controller: 'user',action:'index')
-           }
-
-            else
-               flash.error = "Failed to save the topic"
-            redirect(controller: 'user')
-
-           *//* if (topic.save(flush:true,failOnError:true)) {
-                Subscription subscription = new Subscription(topic: topic,user: user1,seriousness: Seriousness.convertIntoEnum(seriousness))
-                if( subscription.save(flush:true,failOnError:true))
-                    log.info("Created user ${user} also subscribed to its created topic ${topic}")
-                else
-                    log.error("Subscription not saved due to some errors : ${subscription.errors.allErrors}")
-
-                flash.message = "Success ! ${topic} has been saved by ${user}"
-                render flash.message
-            }
-            else {
-//                flash.error = "Failed to save topic"
-                render "Failed to save topic"
-            }*//*
-        }
-        else {
-            flash.error = "Please Login First"
-
-        }
-
-
-
-    }*/
     def save(String topicName,String visibility) {
         println visibility+"----------------"
         Visibility visibility1 = Visibility.stringtoEnum(visibility)
@@ -101,7 +55,7 @@ class TopicController {
         }
     }
 
-    def show(ResourceSearchCO resourceSearchCO) {
+    def showResource(ResourceSearchCO resourceSearchCO) {
         println resourceSearchCO
         Topic topic = Topic.findById(resourceSearchCO.topicId)
         if (topic) {

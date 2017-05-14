@@ -1,10 +1,8 @@
 <div class="panel panel-default"><!--topPosts-->
-    <div class="panel-heading" style="height: 50px;">
+    <div class="panel-heading" style="height: 60px;">
         <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Trending Topics</h4>
 
-        <div class="input-group pull-right">
-            <a>View All</a>
-        </div>
+
     </div>
     <g:each in="${topic}" var="trendingTopic">
 

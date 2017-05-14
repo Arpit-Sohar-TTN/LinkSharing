@@ -35,7 +35,7 @@
             %{--<a class="navbar-brand" href="#">
                 <asset:image src="logo.png" class="logo pull-left" style = "height: 35px;width: 50px"></asset:image>
             </a>--}%
-            <asset:image src="logo.png" class="logo pull-left" style = "height: 45px;width: 40px;padding-top: 10px"></asset:image>
+            <asset:image src="logo.png" href="/user/index" class="logo pull-left" style = "height: 45px;width: 40px;padding-top: 10px"></asset:image>
             <a class="navbar-brand" href="/user/index" style="padding-left: 30px">Link Sharing</a>
         </div>
 
@@ -58,12 +58,17 @@
                 </li>
 </g:if>
             </ul>
-            <form class="navbar-form navbar-right" style="margin-right: 10px" >
+            <form class="navbar-form navbar-right" style="margin-right: 10px" action="/user/search" >
                 <div class="input-group" style="">
-                    <input type="text" name="focus"  required class="search-box" id="newer-txtbox" placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
-                    <g:hiddenField name="hiddenField" value="hiddenField"></g:hiddenField>
+
+                    %{--<input type="text" name="q"  required class="search-box" id="newer-txtbox" onblur="${remoteFunction( controller:'user',action:'search')}"--}%
+
+                        <input type="text" name="q"   class="search-box" id="newer-txtbox"
+                           placeholder="Search" style="width: 50%;background-color: white !important;border-color: black;"/>
+
                     <button class="close-icon redfamily" type="reset"></button>
                     <label  class="glyphicon glyphicon-search redfamily searchIcon"  rel="tooltip" title="Search"></label>
+                    %{--<input type="submit" value="search"/>--}%
 
 
 <g:if test="${session.getAttribute('user')}">
