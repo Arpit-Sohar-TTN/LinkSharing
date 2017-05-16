@@ -21,7 +21,7 @@ class LinkResourceSpec extends Specification {
     def "validateLinkResource"() {
 
         given:
-         user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.password,
+         user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.PASSWORD,
                 userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), lastUpdated: new Date())
          topic = new Topic(topicName: "grails", createdBy: user,dateCreated: new Date(),
                 lastUpdated: new Date(), visibility: Visibility.PRIVATE)

@@ -1,8 +1,8 @@
 <div class="panel-body" style="padding: 10px">
 	<div class="row">
 		<div class="col-md-3 col-xs-12">
-			<img class="img-rounded img-responsive center-block profileImage"
-			     src="../assets/iconProfile.png">
+			<g:img dir="assets/images" file="iconProfile.png"
+			       class="img-rounded img-responsive center-block profileImage"/>
 		</div>
 
 		<div class="col-md-9 col-xs-12 center-block">
@@ -17,8 +17,9 @@
 				<div class="col-xs-3 col-md-3 pull-right"><!--socialConnect-->
 					<button class="pull-right">Save</button>
 				</div><!--./socialConnect-->
-				</div><!--/.username-->
+			</div><!--/.username-->
 			<br/>
+
 			<div class="row"><!--content-->
 				<div class="col-xs-4 col-md-4"><!--button-->
 				@agni <br/> <a>unsbscribe</a>
@@ -33,8 +34,9 @@
 			<br/>
 		</div>
 	</div>
+
 	<div class="row">
-		<span class="glyphicon glyphicon-envelope envIcon" ></span>
+		<span class="glyphicon glyphicon-envelope envIcon"></span>
 		<span class=" glyphicon glyphicon-file envIcon"></span>
 		<span class=" glyphicon glyphicon-trash envIcon"></span>
 

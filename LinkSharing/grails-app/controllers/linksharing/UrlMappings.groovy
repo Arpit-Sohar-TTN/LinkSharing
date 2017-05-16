@@ -5,7 +5,7 @@ class UrlMappings {
 //    static defaultAction = "noAction"
     static allowedMethods = [index: 'GET', update: ['PUT', 'POST']]
     static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
@@ -13,7 +13,7 @@ class UrlMappings {
 
 //        "/User"(controller: "User",action: "noAction")
 
-        "/errorTest"(controller: "Test",action: "save")
+        "/errorTest"(controller: "Test", action: "save")
         "/"(view:"/index")
         "/demo"(view:"/demo")
         "500"(view:'/error')

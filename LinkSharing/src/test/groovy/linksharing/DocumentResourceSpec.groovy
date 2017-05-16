@@ -47,7 +47,7 @@ class DocumentResourceSpec extends Specification {
 
    /* def "tostringCheck"() {
         setup:
-        DocumentResource documentResource = new DocumentResource(filePath: filePath)
+        DocumentResource documentResource = new DocumentResource(FILE_PATH: FILE_PATH)
 
         when:
         result == documentResource.toString()
@@ -56,7 +56,7 @@ class DocumentResourceSpec extends Specification {
         noExceptionThrown()
 
         where:
-        filePath          | result
+        FILE_PATH          | result
         "/some/file/path" | "/some/file/path"
         ""                | ""
         null              | null

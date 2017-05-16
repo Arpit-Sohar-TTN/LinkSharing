@@ -3,170 +3,164 @@ package linksharing
 import com.ttn.vo.TopicVO
 
 class Topic {
-    String topicName;
-    User createdBy
-    Date dateCreated
-    Date lastUpdated
-    Visibility visibility
+	String topicName
+	User createdBy
+	Date dateCreated
+	Date lastUpdated
+	Visibility visibility
 
 
-    static belongsTo = [createdBy:User]
-    static hasMany = [subscriptions:Subscription , resources:Resource]
+	static belongsTo = [createdBy: User]
+	static hasMany = [subscriptions: Subscription, resources: Resource]
 
-    static constraints = {
-        topicName blank: false
-        createdBy(unique: ['topicName'])
-    }
-    static mapping = {
-        sort "topicName"
+	static constraints = {
+		topicName blank: false
+		createdBy(unique: ['topicName'])
+	}
+	static mapping = {
+		sort "topicName"
 
-    }
+	}
 
-    @Override
-    public String toString() {
-        return  topicName
-    }
+	@Override
+	 String toString() {
+		return topicName
+	}
 
+	/*  def afterInsert = {
 
-  /*  def afterInsert = {
-
-        Topic.withNewSession {
-
-
-            Subscription subscription = new Subscription(
-                    user: this.createdBy,
-                    topic: this,
-                    seriousness: Seriousness.VERY_SERIOUS,
-                    dateCreated: new Date(),
-                    dateUpdated: new Date()
-            )
-            this.addToSubscriptions(subscription)
-            if (subscription.save(flush: true)) {
-                log.info "${subscription}-> ${this.createdBy} subscribed for ${this}"
-
-            } else {
-                log.error "Subscription does not occured--- ${subscription.errors.allErrors}"
-            }
-        }
-    }*/
+		  Topic.withNewSession {
 
 
-   /* static List<TopicVO> getTrendingTopics(User user) {
+			  Subscription subscription = new Subscription(
+					  user: this.createdBy,
+					  topic: this,
+					  seriousness: Seriousness.VERY_SERIOUS,
+					  dateCreated: new Date(),
+					  dateUpdated: new Date()
+			  )
+			  this.addToSubscriptions(subscription)
+			  if (subscription.save(flush: true)) {
+				  log.info "${subscription}-> ${this.createdBy} subscribed for ${this}"
 
-        List trendingTopics = Topic.createCriteria().list() {
+			  } else {
+				  log.error "Subscription does not occured--- ${subscription.errors.allErrors}"
+			  }
+		  }
+	  }*/
 
-            projections {
-                groupProperty("id")
-                property("topicName")
-                property("visibility")
-                property("createdBy")
-                resources {
-                    count "id", "count"
-                }
-            }
+	/* static List<TopicVO> getTrendingTopics(User user) {
 
-            order("count", "desc")
-            order("topicName", "desc")
-            maxResults 5 // This is just for pagination
-            firstResult 0
-        }
-        List<TopicVO> topicVOList = []
-        trendingTopics.each {
-            Topic topic = Topic.findByTopicName(it.getAt(1))
-            Subscription subscription = Subscription.findByUserAndTopic(user,topic)
-            if (subscription)
-                topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
-            else
-                topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
-        }
+		 List trendingTopics = Topic.createCriteria().list() {
 
-    }*/
+			 projections {
+				 groupProperty("id")
+				 property("topicName")
+				 property("visibility")
+				 property("createdBy")
+				 resources {
+					 count "id", "count"
+				 }
+			 }
 
+			 order("count", "desc")
+			 order("topicName", "desc")
+			 maxResults 5 // This is just for pagination
+			 firstResult 0
+		 }
+		 List<TopicVO> topicVOList = []
+		 trendingTopics.each {
+			 Topic topic = Topic.findByTopicName(it.getAt(1))
+			 Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+			 if (subscription)
+				 topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
+			 else
+				 topicVOList.add(new TopicVO(id: it.getAt(0), name: it.getAt(1), visibility: it.getAt(2), createdBy: it.getAt(3), count: it.getAt(4),isLoggedInUserSubscribed: true))
+		 }
 
-    /*static List<TopicVO> getTrendingTopics() {
-        List<TopicVO> trendingTopics = []
-     List res =    Resource.createCriteria().list {
-            createAlias('topic', 't')
-            projections {
+	 }*/
 
-                groupProperty("t.id")
-                property("t.topicName")
-                property("t.visibility")
-                property("t.createdBy")
-                *//*topic {
-                            groupProperty("t.id")
-                        }
-                topic {
+	/*static List<TopicVO> getTrendingTopics() {
+		List<TopicVO> trendingTopics = []
+	 List res =    Resource.createCriteria().list {
+			createAlias('topic', 't')
+			projections {
 
-                    property("topicName")
-                    property("visibility")
-                    property("createdBy")*//*
-                    count("t.subscriptions")
+				groupProperty("t.id")
+				property("t.topicName")
+				property("t.visibility")
+				property("t.createdBy")
+				*//*topic {
+							groupProperty("t.id")
+						}
+				topic {
+
+					property("topicName")
+					property("visibility")
+					property("createdBy")*//*
+					count("t.subscriptions")
 
 //                count("t.subscriptions")
 
-                count("t.id", "topicCount")
-            }
+				count("t.id", "topicCount")
+			}
 
-            order("topicCount", "desc")
-            order("topic.topicName", "desc")
-            maxResults(5)
-        }
-        println res
-     res.each {
-            trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
-                    createdBy: it[3],noOfSubscribedUsers: it[4], count: it[5]))
-        }
-        return trendingTopics
-    }
+			order("topicCount", "desc")
+			order("topic.topicName", "desc")
+			maxResults(5)
+		}
+
+	 res.each {
+			trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
+					createdBy: it[3],noOfSubscribedUsers: it[4], count: it[5]))
+		}
+		return trendingTopics
+	}
 */
 
 
-    static List<TopicVO> getTrendingTopics() {
-        List<TopicVO> trendingTopics = []
-        Resource.createCriteria().list {
-            createAlias('topic', 't')
-            projections {
-                groupProperty("t.id")
-                property("t.topicName")
-                property("t.visibility")
-                property("t.createdBy")
-                count("t.subscriptions")
-                count("t.id", "topicCount")
-            }
-            order("topicCount", "desc")
-            order("t.topicName", "desc")
-            maxResults(5)
-        }.each {
-            trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
-                    createdBy: it[3],noOfSubscribedUsers: it[4], count: it[5]))
-        }
-        return trendingTopics
-    }
-    static List<User> getSubscribedUsers(Topic topic) {
-        List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
-        List<User> subscribedUsers = []
-        subscriptions.each {subscription->
-            subscribedUsers.add(subscription.user)
-        }
-        return subscribedUsers
-    }
+	static List<TopicVO> getTrendingTopics() {
+		List<TopicVO> trendingTopics = []
+		Resource.createCriteria().list {
+			createAlias('topic', 't')
+			projections {
+				groupProperty("t.id")
+				property("t.topicName")
+				property("t.visibility")
+				property("t.createdBy")
+				count("t.subscriptions")
+				count("t.id", "topicCount")
+			}
+			order("topicCount", "desc")
+			order("t.topicName", "desc")
+			maxResults(5)
+		}.each {
+			trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
+					createdBy: it[3], noOfSubscribedUsers: it[4], count: it[5]))
+		}
+		return trendingTopics
+	}
+
+	static List<User> getSubscribedUsers(Topic topic) {
+		List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
+		List<User> subscribedUsers = []
+		subscriptions.each { subscription ->
+			subscribedUsers.add(subscription.user)
+		}
+		return subscribedUsers
+	}
 
 }
 
 
+enum Visibility {
+	PUBLIC, PRIVATE
 
 
-
-
-enum Visibility{
-    PUBLIC , PRIVATE
-
-
-    static Visibility stringtoEnum(String visibility) {
-        if (visibility.equals('PUBLIC'))
-            return Visibility.PUBLIC
-        else if (visibility.equals('PRIVATE'))
-            return Visibility.PRIVATE
-    }
+	static Visibility stringtoEnum(String visibility) {
+		if (visibility == ('PUBLIC'))
+			return Visibility.PUBLIC
+		else if (visibility == ('PRIVATE'))
+			return Visibility.PRIVATE
+	}
 }

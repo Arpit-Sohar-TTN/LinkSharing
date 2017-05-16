@@ -5,7 +5,6 @@ import com.ttn.co.TopicCO
 import com.ttn.util.Constants
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
-import grails.transaction.Transactional
 import spock.lang.Specification
 
 /**
@@ -19,8 +18,8 @@ class TopicControllerSpec extends Specification {
    def "testing save action in topic controller "() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush:true)
         session.setAttribute('user',user)
         String topicName = "Groovy"
@@ -38,8 +37,8 @@ class TopicControllerSpec extends Specification {
     def "testing save action if topic is already saved "() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush:true)
         session.setAttribute('user',user)
         String topicName = "Groovy"
@@ -69,8 +68,8 @@ class TopicControllerSpec extends Specification {
         given:
         int id=1
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         topic.save(flush:true)
@@ -92,8 +91,8 @@ class TopicControllerSpec extends Specification {
     def "Testing show for public Topic "() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush:true)
         session.setAttribute('user',user)
         String topicName = "Groovy"
@@ -111,8 +110,8 @@ class TopicControllerSpec extends Specification {
     def "Testing show for private Topic  "() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush:true)
         session.setAttribute('user',user)
         String topicName = "Groovy"

@@ -10,8 +10,8 @@ class UserControllerSpec extends Specification {
     def "testUserIndex"() {
         given: "user is set in session"
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "arpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, isAdmin: false,
-                isActive: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, isAdmin: false,
+                isActive: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush: true)
         session["user"] = user
 

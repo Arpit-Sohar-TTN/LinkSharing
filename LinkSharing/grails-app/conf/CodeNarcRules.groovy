@@ -55,7 +55,7 @@ ruleset {
     // rulesets/braces.xml
     ElseBlockBraces
     ForStatementBraces
-    IfStatementBraces
+   // IfStatementBraces
     WhileStatementBraces
 
     // rulesets/concurrency.xml
@@ -88,7 +88,7 @@ ruleset {
 
     // rulesets/convention.xml
     ConfusingTernary
-    CouldBeElvis
+   // CouldBeElvis
     HashtableIsObsolete
     IfStatementCouldBeTernary
     InvertedIfElse
@@ -168,7 +168,7 @@ ruleset {
     // rulesets/formatting.xml
     BracesForClass
     BracesForForLoop
-    BracesForIfElse
+   // BracesForIfElse
     BracesForMethod
     BracesForTryCatchFinally
     ClassJavadoc {
@@ -239,7 +239,7 @@ ruleset {
     ExplicitCallToCompareToMethod
     ExplicitCallToDivMethod
     ExplicitCallToEqualsMethod
-    ExplicitCallToGetAtMethod
+   // ExplicitCallToGetAtMethod
     ExplicitCallToLeftShiftMethod
     ExplicitCallToMinusMethod
     ExplicitCallToModMethod
@@ -427,7 +427,7 @@ ruleset {
     UnnecessaryModOne
     UnnecessaryNullCheck
     UnnecessaryNullCheckBeforeInstanceOf
-    UnnecessaryObjectReferences
+   // UnnecessaryObjectReferences
     UnnecessaryOverridingMethod
     UnnecessaryPackageReference
     UnnecessaryParenthesesForMethodCallWithClosure

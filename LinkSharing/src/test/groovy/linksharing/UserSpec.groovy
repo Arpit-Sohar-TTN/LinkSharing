@@ -2,7 +2,6 @@ package linksharing
 
 import com.ttn.util.Constants
 import grails.test.mixin.TestFor
-import org.apache.tomcat.util.bcel.Const
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -39,9 +38,9 @@ class UserSpec extends Specification {
 
         where:
         firstName  | lastName | email             | userName   | password           | isActive | image | isAdmin | dateCreated | dateUpdated | validate
-        "Arpit"    | "Sohar"  | "arpit@ttn.com"   | "arpit"    | Constants.password | true     | []    | true    | new Date()  | new Date()  | true
+        "Arpit"    | "Sohar"  | "arpit@ttn.com"   | "arpit"    | Constants.PASSWORD | true     | []    | true    | new Date()  | new Date()  | true
 // checking for email format
-        "prashant" | "gupta"  | "prashantttn.com" | "prashant" | Constants.password | true     | []    | true    | new Date()  | new Date()  | false
+        "prashant" | "gupta"  | "prashantttn.com" | "prashant" | Constants.PASSWORD | true     | []    | true    | new Date()  | new Date()  | false
 
     }
 
@@ -68,8 +67,8 @@ class UserSpec extends Specification {
                 firstName: "fname",
                 lastName: "lname",
                 email: "123@gmail.com",
-                password: Constants.password,
-                confirmPassword: Constants.password,
+                password: Constants.PASSWORD,
+                confirmPassword: Constants.PASSWORD,
                 userName: username,
                 dateCreated: new Date(),
                 lastUpdated: new Date())
@@ -87,7 +86,7 @@ class UserSpec extends Specification {
         User user = new User(firstName: "fname",
                 lastName: "lname",
                 email: email,
-                password: Constants.password,confirmPassword: Constants.password,
+                password: Constants.PASSWORD,confirmPassword: Constants.PASSWORD,
                 userName: "Arpit",
                 isActive: true,
                 isAdmin: false,
@@ -103,7 +102,7 @@ class UserSpec extends Specification {
                 firstName: "fname",
                 lastName: "lname",
                 email: email,
-                password: Constants.password,confirmPassword: Constants.password,
+                password: Constants.PASSWORD,confirmPassword: Constants.PASSWORD,
                 userName: "Arpit Sohar",
                 dateCreated: new Date(),
                 lastUpdated: new Date())

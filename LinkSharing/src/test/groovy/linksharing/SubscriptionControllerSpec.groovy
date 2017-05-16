@@ -16,8 +16,8 @@ class SubscriptionControllerSpec extends Specification {
        given:
        int topicId = 2
        User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-               email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-               active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+               email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+               active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
        session.setAttribute('user',user)
        Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
        Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PUBLIC)
@@ -40,8 +40,8 @@ class SubscriptionControllerSpec extends Specification {
         given:
         int topicId = 2
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PRIVATE)
@@ -64,8 +64,8 @@ class SubscriptionControllerSpec extends Specification {
         given:
         int topicId = 1
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PRIVATE)
@@ -96,8 +96,8 @@ class SubscriptionControllerSpec extends Specification {
         given:
         int topicId = 1
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         user.addToTopics(topic)
@@ -118,8 +118,8 @@ class SubscriptionControllerSpec extends Specification {
         given:
         int topicId = 1
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         user.addToTopics(topic)
@@ -141,8 +141,8 @@ class SubscriptionControllerSpec extends Specification {
         int topicId = 2
         String seriousness = Seriousness.CASUAL
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PUBLIC)
@@ -168,8 +168,8 @@ class SubscriptionControllerSpec extends Specification {
         int topicId = 2
         String seriousness = Seriousness.CASUAL
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PUBLIC)
@@ -192,8 +192,8 @@ class SubscriptionControllerSpec extends Specification {
         int topicId = 2
         String seriousness = Seriousness.SERIOUS
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, admin: false,
-                active: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, admin: false,
+                active: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         session.setAttribute('user',user)
         Topic topic1  =  new Topic(id: 1, topicName: 'G1',createdBy: user,visibility: Visibility.PUBLIC)
         Topic topic2  =  new Topic(id: 2, topicName: 'G2',createdBy: new User(),visibility: Visibility.PUBLIC)

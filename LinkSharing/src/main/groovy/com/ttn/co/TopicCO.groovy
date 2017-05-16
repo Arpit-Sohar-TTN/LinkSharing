@@ -4,32 +4,31 @@ import grails.validation.Validateable
 import linksharing.User
 import linksharing.Visibility
 
-import javax.validation.Valid
 
 /**
- * Created by arpit on 5/5/17.
+ * Created by mayank on 5/5/17.
  */
 
-class TopicCO implements Validateable{
-    Long id
-    String topicName
-    User createdBy
-    Date dateCreated
-    Date lastUpdated
-    Visibility visibility
+class TopicCO implements Validateable {
+	Long id
+	String topicName
+	User createdBy
+	Date dateCreated
+	Date lastUpdated
+	Visibility visibility
 
-    static constraints = {
-        topicName blank: false
-    }
+	static constraints = {
+		topicName blank: false
+	}
 
-    @Override
-    public String toString() {
-        return "TopicCO{" +
-                "topicName='" + topicName + '\'' +
-                ", createdBy=" + createdBy +
-                ", dateCreated=" + dateCreated +
-                ", lastUpdated=" + lastUpdated +
-                ", visibility=" + visibility +
-                '}';
-    }
+	@Override
+	String toString() {
+		return "TopicCO{" +
+				"topicName='" + topicName + '\'' +
+				", createdBy=" + createdBy +
+				", dateCreated=" + dateCreated +
+				", lastUpdated=" + lastUpdated +
+				", visibility=" + visibility +
+				'}'
+	}
 }

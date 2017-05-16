@@ -4,20 +4,17 @@ package linksharing
 class LoginInterceptor {
 
 
-    LoginInterceptor() {
-        matchAll().excludes (controller: 'login' )
-    }
-    boolean before() {
-       /* if(!session.getAttribute('user')) {
+	LoginInterceptor() {
+		matchAll().excludes(controller: 'login')
+	}
 
-            redirect(controller: "login", action: "index")
-        }*/
-        true
-    }
+	boolean before() {
+		/* if(!session.getAttribute('user')) {
 
-    boolean after() { true }
+			 redirect(controller: "login", action: "index")
+		 }*/
+		true
+	}
 
-    void afterView() {
-        // no-op
-    }
+	boolean after() { true }
 }

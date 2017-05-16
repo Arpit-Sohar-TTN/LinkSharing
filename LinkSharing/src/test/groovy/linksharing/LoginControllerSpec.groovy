@@ -58,8 +58,8 @@ class LoginControllerSpec extends Specification {
     def "checkIfUserExistsButNotActive"() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "arpitSohar",
-                email: "arpit.sohar@gmail.com", password: Constants.password, admin: true,
-                active: false, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@gmail.com", password: Constants.PASSWORD, admin: true,
+                active: false, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush: true)
 
         when:
@@ -72,8 +72,8 @@ class LoginControllerSpec extends Specification {
     def "checkIfUserExistsButIsActive"() {
         given:
         User user = new User(firstName: "Arpit", lastName: "Sohar", userName: "ArpitSohar",
-                email: "arpit.sohar@ttn.com", password: Constants.password, isAdmin: false,
-                isActive: true, photo: "abc".bytes, confirmPassword: Constants.password)
+                email: "arpit.sohar@ttn.com", password: Constants.PASSWORD, isAdmin: false,
+                isActive: true, photo: "abc".bytes, confirmPassword: Constants.PASSWORD)
         user.save(flush: true)
 
         when:

@@ -8,7 +8,7 @@
 			Subscriptions<br/>60
 			</div><!--./socialConnect-->
 			<div class="col-xs-2 col-md-2 pull-right"><!--viewPost-->
-				<a href="#" class=" viewPost"> Topics <br/> 30</a>
+				<a href="#" class=" viewPost">Topics <br/> 30</a>
 			</div><!--./viewPost-->
 		</div>
 	</div>

@@ -5,6 +5,7 @@
 	<title>Dashboard</title>
 	%{--<asset:image src="icon.png"></asset:image>--}%
 </head>
+
 <body>
 <div class="col-md-5 col-xs-12">
 	<g:render template="/editProfile/id"/>
@@ -17,11 +18,12 @@
 	%{--<g:render template="/dashboard/subscriptionProp"/>--}%
 	%{--<g:render template="trendingTopic"/>--}%
 
-	<ls:trendingTopics />
+	<ls:trendingTopics/>
 	%{--<g:render template="/dashboard/trendingTopicProp"/>--}%
 </div>
+
 <div class="col-md-7 col-xs-12 paginate">
-	<g:render template="inbox" />
+	<g:render template="inbox"/>
 </div>
 
 </body>

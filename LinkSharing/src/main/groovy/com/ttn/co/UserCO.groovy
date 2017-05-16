@@ -4,21 +4,18 @@ import grails.validation.Validateable
 import groovy.transform.ToString
 
 /**
- * Created by arpit on 5/5/17.
+ * Created by mayank on 5/5/17.
  */
 @ToString
 class UserCO implements Validateable {
-    String userName
-    String firstName
-    String lastName
-    String email
-    String password
-    File image
-    boolean isAdmin
-    boolean isActive
-    Date dateCreated
-    Date lastUpdated
-    String confirmPassword
+	String userName
+	String firstName
+	String lastName
+	String email
+	String password
+	boolean isAdmin = false
+	boolean isActive = true
+	String confirmPassword
 // static constraints ={email email: true, unique: true, blank: false}
 
 }

@@ -52,7 +52,7 @@ class SubscriptionSpec extends Specification {
     def "Testing User not to subscribe to topic multiple times"() {
 
         given:
-        User user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.password,
+        User user = new User(firstName: "fname", lastName: "lname", email: "1234@gmail.com", password: Constants.PASSWORD,
                 userName: "Arpit", isActive: true, isAdmin: false, dateCreated: new Date(), lastUpdated: new Date())
         Topic topic = new Topic(topicName: "grails", createdBy: user,dateCreated: new Date(),
                 lastUpdated: new Date(), visibility: Visibility.PRIVATE)
