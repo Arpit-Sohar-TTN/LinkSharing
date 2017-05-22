@@ -14,8 +14,6 @@ import grails.transaction.Transactional
 class UserController {
 	def userService
 	def assetResourceLocator
-//    static responseFormat = ["json"]
-//  static namespace = "test1"
 	def pagination() {
 		params.max = 5
 		params.offset = 0
@@ -47,14 +45,6 @@ class UserController {
 	}
 
 	def changeIsRead(Long id) {
-
-		/*
-			According to Ques
-		if( ReadingItem.executeUpdate('Update ReadingItem set isRead=:read where id=:i',[read:isRead,i:id]))
-			render "Success"
-		else
-			render "Failure"*/
-		//According to requirement in project
 		User user = session.getAttribute('user')
 		Resource resource = Resource.get(id)
 		ReadingItem readingItem = ReadingItem.findByUserAndResource(user, resource)
@@ -86,7 +76,6 @@ class UserController {
 					User user = User.findById(id)
 					Subscription subscription = Subscription.findByUserAndTopic(user, topic)
 					if (subscription) {
-//                    render "success for ${topic} whose visibility is ${topic.visibility}"
 						render view: 'topic/index'
 					} else {
 						flash.error = "User not subscribed to required private topic"
@@ -113,13 +102,13 @@ class UserController {
 		render f.inputStream.text
 	}
 
-	def download() {
+	/*def download() {
 //        byte[] orderPDF = ... // create the bytes from some source
 		byte[] bytes = new File("/home/mayank/Desktop/test.json").bytes
 		response.setHeader("Content-disposition", "attachment; filename= abc.json")
 		response.contentLength = bytes.length
 		response.outputStream << bytes
-	}
+	}*/
 
 	def editProfile() {
 		User user = session.getAttribute('user')
@@ -128,31 +117,10 @@ class UserController {
 		render view: 'editProfile', model: [userVO: userVO]
 	}
 
-	/* def updateProfile(UserCO userCO) {
-		 Long id = session.user.id
-		 User user = User.get(id)
-		 user.firstName = userCO.firstName
-		 user.lastName = userCO.lastName
-		 user.userName = userCO.userName
-		 def file = request.getFile('image')
-		 user.image = file.getBytes()
-		 *//*user.save(flush:true)
 
-		 String FILE_PATH = "${Constants.IMAGES_PATH}/${file}"
-		 File file2 = new File(FILE_PATH)
-		 file.transferTo(file2)*//*
-		 if (user.save(flush: true, failOnError: true)) {
-			 flash.message = "${user.userName} values updated"
-			 redirect(controller: 'user', action: 'editProfile')
-		 } else {
-			 flash.error = "Failed to update the values"
-			 redirect(controller: 'user', action: 'editProfile')
-		 }
-	 }*/
 
 	def updateProfile(UserCO co) {
 		def msg = flash.message ?: ""
-/*        User user = User.findByUsername(session.user.username)*/
 		User user = User.findByUserName(session.user.userName)
 		if (user) {
 			if (co.firstName)
@@ -160,7 +128,7 @@ class UserController {
 			if (co.lastName)
 				user.lastName = co.lastName
 			if (co.userName)
-/*                user.username = co.username*/
+
 				user.userName = co.userName
 			user.confirmPassword = user.password
 			def file = request.getFile('image')
@@ -173,11 +141,9 @@ class UserController {
 				session.user = user
 			} else {
 				flash.error = "Error updating profile"
-// msg = flash.message
 			}
 		} else {
 			flash.error = "User Not Found"
-// msg = flash.message
 		}
 		redirect(controller: "user", action: "editProfile", params: [message: msg])
 	}
@@ -272,35 +238,7 @@ class UserController {
 		}
 		render view: 'search', model: [topPosts: topPosts, resources: resultResources, topics: resultTopics, q: q]
 	}
-	/* def viewImage = {
 
-		*//* def photo = Photo.get( params.id )*//**//*
-        User user = session.user
-        def photo = user.image
-        byte[] image = photo.file
-        response.outputStream << image*//*
-        //def product = Product.findByProductName(params.productName)
-        def user = User.findByUserName(params.userName)
-        byte[] imageInByte = user.image
-        response.contentType = 'image/png' // or the appropriate image content type
-        response.outputStream << imageInByte
-        response.outputStream.flush()
-
-    }*/
-
-	/*def image(Long id) {
-		User user = User.get(id)
-		byte[] photo
-
-		if (user.image) {
-			photo = user.image
-		}
-		response.contentType = 'image/png'
-		OutputStream out = response.getOutputStream()
-		out.write(photo)
-		out.flush()
-		out.close()
-	}*/
 
 	def image(Long userId) {
 		User user = User.load(userId)
@@ -315,16 +253,5 @@ class UserController {
 		out.flush()
 		out.close()
 	}
-	/* def adminPanel(SearchCO co) {
-		 if(!co.offset)
-			 co.offset=0
 
-		 User user = User.findByUserName(session.user)
-		 if (user.isAdmin) {
-			 List<User> userList = User.createCriteria().list(sort:co.sort,order:co.order,offset:co.offset,max:5){eq("admin",false)}
-			 render(view: 'admin', model: [userList: userList])
-		 } else {
-			 redirect(controller: "user", action: "dashboard")
-		 }
-	 }*/
 }

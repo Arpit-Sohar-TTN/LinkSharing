@@ -32,8 +32,8 @@
 			<br>
 
 			<div class="col-xs-8 col-md-8" style="font-size: small"><!--viewPost-->
-				<span><a href="#" class=" viewPost">Download</a></span>
-				<span><a href="#" class=" viewPost">View Full Size</a></span>
+				%{--<span><a href="#" class=" viewPost">Download</a></span>
+				<span><a href="#" class=" viewPost">View Full Size</a></span>--}%
 				%{--</div>
 				<div class="col-xs-4 col-md-4" >--}%
 

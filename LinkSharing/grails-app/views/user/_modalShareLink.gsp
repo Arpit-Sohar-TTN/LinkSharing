@@ -30,7 +30,7 @@
 
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-default btn-success"/>
-					<button type="button" class="btn btn-primary">Cancel</button>
+					<button type="button" class="btn btn-primary"  data-dismiss="modal">Cancel</button>
 				</div>
 			</g:form>
 		</div>

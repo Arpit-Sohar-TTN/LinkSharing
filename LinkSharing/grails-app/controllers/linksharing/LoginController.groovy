@@ -11,16 +11,19 @@ class LoginController {
 	}
 
 	def index() {
-//            render(view:"/login/index")
-//           render "Login Here"+Resource.topPost()
+		println 1
 		List<ResourceVO> topPosts = Resource.topPost()
 		List<ResourceVO> recentShares = Resource.recentShares()
-		render view: 'index', model: [topPosts: topPosts, recentShares: recentShares]
-
+		if (session.user==null) {
+			render view: 'index', model: [topPosts: topPosts, recentShares: recentShares]
+		} else {
+			redirect(controller: 'user',action: 'index')
+		}
 	}
 
 
 	def loginHandler(String username, String password) {
+		println 2
 		User user = User.findByUserNameAndPassword(username, password)
 		if (user) {
 			if (user.isActive) {

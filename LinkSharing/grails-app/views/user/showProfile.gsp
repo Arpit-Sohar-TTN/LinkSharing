@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <head>
 	<meta name="layout" content="main">
-	<title>Topic Show</title>
+	<title>Profile</title>
 	%{--<asset:image src="icon.png"></asset:image>--}%
 </head>
 

@@ -2,17 +2,20 @@ package linksharing
 
 class ApplicationInterceptor {
 
-	/*ApplicationInterceptor() {
-      matchAll().excludes (controller:'user',action: 'index')
+	ApplicationInterceptor() {
+      matchAll().excludes (controller:'login',action:'index')
+			  .excludes (controller:'resource',action:'showPost')
+		.excludes (controller:'login',action:'loginHandler')
 
-	}*/
+
+	}
 
 	boolean before() {
-		log.info(params.toMapString())
-		/* if (!session.getAttribute('user')) {
+//		log.info(params.toMapString())
+		 if (!session.getAttribute('user')) {
 			 redirect(controller:'login',action: 'index')
-		 }*/
-
+		 }
+	true
 
 	}
 

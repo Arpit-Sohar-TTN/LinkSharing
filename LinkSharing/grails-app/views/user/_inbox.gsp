@@ -42,15 +42,7 @@
 						<br>
 
 						<div class="col-xs-4 col-md-4" style="font-size: smaller"><!--viewPost-->
-						%{--<span><a href="#" class=" viewPost"> Download</a></span>--}%
-						%{--<g:if test="${userVO.resourceVOList.id.class.toString() == 'class com.ttn.linksharing.DocumentResource'}">
-							<g:link controller="documentResource" action="download"
-									params="[resourceId:userVO.resourceVOList.id]"><p class="post-option">Download</p></g:link>
-						</g:if>
 
-						<g:if test="${userVO.resourceVOList.id.class.toString() == 'class com.ttn.linksharing.LinkResource'}">
-							<a href="${userVO.resourceVOList.id.url}"><p class="post-option">View-Site</p></a>
-						</g:if>--}%
 							<g:if test="${(Resource.get(resourceVO.id)) instanceof LinkResource}">
 								<a href="${(Resource.get(resourceVO.id)).url}"><p class="post-option">View-Site</p></a>
 							</g:if>
@@ -59,7 +51,7 @@
 								        params="[resourceId: resourceVO.id]"><p
 										class="post-option">Download</p></g:link>
 							</g:else>
-						%{--<span><a href="#" class=" viewPost"> View Full Size</a></span>--}%
+
 						</div>
 
 						<div class="col-xs-4 col-md-4" style="font-size: smaller">
@@ -73,6 +65,5 @@
 		</g:if>
 
 	</g:each>
-%{--<g:paginate controller="user" action="pagination" total="23"/>--}%
 
 </div>

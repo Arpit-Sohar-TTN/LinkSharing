@@ -39,7 +39,7 @@
 					Subscriptions<br/>${subscribedTopic.noOfSubscribedUsers}
 					</div><!--./socialConnect-->
 					<div class="col-xs-3 col-md-3 pull-right"><!--viewPost-->
-						<a href="#" class=" viewPost">Posts <br/> ${subscribedTopic.count}</a>
+						<p class=" viewPost">Posts <br/> ${subscribedTopic.count}</p>
 					</div><!--./viewPost-->
 					<br/>
 				</div>

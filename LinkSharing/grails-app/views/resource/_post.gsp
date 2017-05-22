@@ -1,3 +1,4 @@
+<%@ page import="linksharing.LinkResource" %>
 <div class="panel-body profileSidePanel">
 	<div class="col-md-3 col-xs-12">
 		%{--<img class="img-rounded img-responsive center-block profileImage" src="../assets/iconProfile.png">--}%
@@ -76,9 +77,14 @@
 			   </div>
 			<br>
 			   <div class="col-xs-6" style="font-size: smaller">
-				  <span><a href="#" class="pull-right viewPost"> Download</a></span>
-				  <span><a href="#" class="pull-right viewPost"> View Full Size</a></span>
-				  <span><a href="#" class="pull-right viewPost"> Mark as Read</a></span>
+			<g:if test="${resource instanceof linksharing.LinkResource}">
+				<a href="${resource.url}"><p class="post-option">View-Site</p></a>
+			</g:if>
+			<g:else>
+				<g:link controller="resource" action="download"
+						params="[resourceId: resource.id]"><p
+						class="post-option">Download</p></g:link>
+			</g:else>
 		%{--<span><a href="#" class="pull-right viewPost"> View Post</a></span>--}%
 			<g:if test="${session.user.userName == resource.createdBy.userName || session.user.isAdmin == true}">
 

@@ -1,3 +1,4 @@
+<%@ page import="linksharing.LinkResource" %>
 <div class="panel panel-default">
 	<div class="panel-heading" style="height: 60px;">
 		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Post: ${topic.topicName}</h4>
@@ -33,14 +34,17 @@
 					<br>
 
 					<div class="col-xs-4 col-md-4" style="font-size: smaller">
-						<span><g:link controller="resource" action="download"
-						              params="[resourceId: resource.id]"><p
-									class="post-option">Download</p>
-						</g:link></span>
+						<g:if test="${resource instanceof linksharing.LinkResource}">
+							<a href="${resource.url}"><p class="post-option">View-Site</p></a>
+						</g:if>
+						<g:else>
+							<g:link controller="resource" action="download"
+									params="[resourceId: resource.id]"><p
+									class="post-option">Download</p></g:link>
+						</g:else>
 					</div>
 
 					<div class="col-xs-4 col-md-4" style="font-size: smaller">
-						<span><a href="#" class=" viewPost">View Full Size</a></span>
 						<span><g:link controller="resource" action="showPost" params="[id: resource.id]"
 						              class=" viewPost">View Post</g:link></span>
 					</div>

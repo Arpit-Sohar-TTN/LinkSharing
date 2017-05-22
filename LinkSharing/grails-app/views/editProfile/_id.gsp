@@ -25,7 +25,7 @@
 				Subscriptions<br/>${userVO.noOfSubscriptions}
 				</div><!--./socialConnect-->
 				<div class="col-xs-6 col-md-6"><!--viewPost-->
-					<a href="#" class="pull-right viewPost">Topics <br/> ${userVO.noOfCreatedTopics}</a>
+					<p class="pull-right viewPost">Topics <br/> ${userVO.noOfCreatedTopics}</p>
 				</div><!--./viewPost-->
 			</div><!--/.import link-->
 		</div>
