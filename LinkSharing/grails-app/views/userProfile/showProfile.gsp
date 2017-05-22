@@ -15,7 +15,18 @@
 </div>
 
 <div class="col-md-7 col-xs-12">
-	<g:render template="/userProfile/post"/>
+	<div class="panel-heading" style="height: 50px;">
+		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Posts</h4>
+
+		<div class="input-group pull-right" style="margin-right: -100px; margin-top: -5px">
+			<input type="text" name="focus" required class="search-box" placeholder="Search"
+				   style="width: 50%;margin-right:0px"/>
+			<button class="close-icon redfamily" type="reset"></button>
+			<label class="glyphicon glyphicon-search redfamily searchIcon" rel="tooltip" title="Search"></label>
+		</div>
+	</div>
+	3
+	<g:render template="/topic/post1" collection= "${userVO.resourceVOList}" var="post"/>
 </div>
 </body>
 </html>

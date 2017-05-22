@@ -4,8 +4,12 @@ class ApplicationInterceptor {
 
 	ApplicationInterceptor() {
       matchAll().excludes (controller:'login',action:'index')
-			  .excludes (controller:'resource',action:'showPost')
 		.excludes (controller:'login',action:'loginHandler')
+		.excludes (controller:'login',action:'logout')
+		.excludes (controller:'resource',action:'showPost')
+			  .excludes (controller:'resource',action:'download')
+			  .excludes (controller:'user',action:'search')
+
 
 
 	}
@@ -13,9 +17,11 @@ class ApplicationInterceptor {
 	boolean before() {
 //		log.info(params.toMapString())
 		 if (!session.getAttribute('user')) {
-			 redirect(controller:'login',action: 'index')
+			 println "interceptor"
+			 redirect(controller: 'login',action:'index')
 		 }
-	true
+		true
+
 
 	}
 

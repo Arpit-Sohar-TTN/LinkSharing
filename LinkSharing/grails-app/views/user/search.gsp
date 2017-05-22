@@ -13,7 +13,7 @@
 	<div class="panel-heading" style="height: 60px;">
 		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Top Posts</h4>
 	</div>
-	<g:render template="/login/Post"/>
+	<g:render template="/topic/post1" collection="${topPosts}" var="resource"/>
 
 </div>
 

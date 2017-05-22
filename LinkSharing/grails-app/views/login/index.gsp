@@ -11,12 +11,14 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Recent Shares</h3>
 	</div>
-	<g:render template="/login/Post" model="[topPosts: recentShares]"/>
-
+	%{--<g:render template="/login/Post" model="[topPosts: recentShares]"/>--}%
+	<g:render template="/topic/post1" collection="${recentShares}" var="resource"/>
 	<div class="panel-heading">
 		<h3 class="panel-title">Top Post</h3>
 	</div>
-	<g:render template="/login/Post" model="[topPosts: topPosts]"/>
+	%{--<g:render template="/login/Post" model="[topPosts: topPosts]"/>--}%
+	<g:render template="/topic/post1" collection="${topPosts}" var="resource"/>
+
 </div>
 
 <div class="col-md-5 col-xs-12">

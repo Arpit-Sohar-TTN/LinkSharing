@@ -39,7 +39,7 @@
 		%{--<g:form controller="mailSending" action="sendMail" method="post" enctype="multipart/form-data">
 			<input  value="Forget Passwors" type="submit" id="button2" class="btn btn-success btn-block" data-toggle="modal" data-target="#sendMail" />
 		</g:form>--}%
-		<input value="Forget Passwors" type="submit" id="button2" class="btn btn-success btn-block" data-toggle="modal"
+		<input value="Forget Password" type="submit" id="button2" class="btn btn-success btn-block" data-toggle="modal"
 		       data-target="#sendMail"/>
 	</div>
 </div>

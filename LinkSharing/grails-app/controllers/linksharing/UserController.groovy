@@ -33,8 +33,6 @@ class UserController {
 
 			List subscribedTopic = User.getSubscribedTopic(user)
 			render('view': 'index', model: [user: user, trendingTopics: trendingTopics, userVO: userVO, subscribedTopic: subscribedTopic])
-		} else {
-			redirect(controller: 'login', action: 'index')
 		}
 	}
 

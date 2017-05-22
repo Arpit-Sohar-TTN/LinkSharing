@@ -67,12 +67,13 @@
 		</div>
 	</g:if>
 
+	<g:render template="/topic/post1" collection="${resources}" var="resource"/>
 
-	<g:each in="${resources}" var="resource">
+	%{--<g:each in="${resources}" var="resource">
 
 		<div class="panel-body">
 			<div class="col-md-2 col-xs-12">
-				%{--<img class="img-rounded img-responsive center-block profileImage" src="../assets/iconProfile.png">--}%
+				--}%%{--<img class="img-rounded img-responsive center-block profileImage" src="../assets/iconProfile.png">--}%%{--
 				<ls1:userImage userId="${resource.createdBy.id}"/>
 			</div>
 
@@ -101,49 +102,8 @@
 				</div><!--/.import link-->
 			</div>
 		</div>
-	</g:each>
-
-%{--<g:each in="${topics}" var="topic">
+	</g:each>--}%
 
 
-
-<div class="panel-body paginate">
-    <div class="col-md-2 col-xs-12">
-        <img class="img-rounded img-responsive center-block profileImage"  src="../assets/iconProfile.png">
-    </div>
-    <div class="col-md-10 col-xs-12 center-block">
-        <div class="row myContent"><!--content-->
-        ${topic.topicName}  ${topic.createdBy}
-        </div><!--/.content-->
-        <div class="row"><!--import link-->
-            <div class="col-xs-4 col-md-4" style="display: inline-block"><!--socialConnect-->
-                <a class="btn btn-social-icon btn-facebook">
-                    <span class="fa fa-facebook"></span>
-                    <span class="fa fa-twitter" style="padding-left: 10px"></span>
-                    <span class="fa fa-google-plus" style="padding-left: 10px"></span>
-                    <!--</a>
-                                <a class="btn btn-social-icon btn-twitter">
-                                    <span class="fa fa-twitter"></span>
-                                </a>
-                                <a class="btn btn-social-icon btn-google">
-                                    <span class="fa fa-google-plus"></span>-->
-                </a>
-            </div><!--./socialConnect-->
-        <br>
-            <div class="col-xs-8 col-md-8" style="font-size: smaller"><!--viewPost-->
-                <span><a href="#" class=" viewPost"> Download</a></span>
-                <span><a href="#" class=" viewPost"> View Full Size</a></span>
-            --}%%{--</div>
-            <div class="col-xs-4 col-md-4" >--}%%{--
-                <span><ls:isRead resource="${resourceVO}"/>	</span>
-                <span><g:link controller="resource" action="showPost" params="[id:resourceVO.id]" class=" viewPost"> View Post</g:link></span>
-            </div><!--./viewPost-->
-        </div><!--/.import link-->
-    </div>
-</div>
-
-
-</g:each>--}%
-%{--<g:paginate controller="user" action="pagination" total="23"/>--}%
 
 </div>

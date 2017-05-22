@@ -11,16 +11,6 @@
 
 				<div class="col-md-9 col-xs-12 center-block">
 					<div class="row"><!--username-->
-					%{--<div class="col-xs-3 col-md-3"><!--username-->
-						<i>@ ${session.user}</i>
-					</div><!--./username-->
-
-					<div class="col-xs-3 col-md-3 center-block"><!--socialConnect-->
-					Subscriptions<br/>${subscribedTopic.noOfSubscribedUsers}
-					</div><!--./socialConnect-->
-					<div class="col-xs-3 col-md-3 pull-right"><!--viewPost-->
-						<a href="#" class=" viewPost"> Posts <br/> ${userVO.noOfCreatedTopics}</a>
-					</div><!--./viewPost-->--}%
 						<br>
 						<g:link controller="topic" action="showTopic" id="${subscribedTopic.id}"><b
 								style="margin-left: 30px;">${subscribedTopic.name}</b></g:link>
