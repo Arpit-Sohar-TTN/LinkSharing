@@ -5,10 +5,12 @@ class AdminController {
 	def index() {
 
 		int offset, max
-		if (params.offset)
+		if (params.offset) {
 			offset = params.int('offset')
-		if (params.max)
+		}
+		if (params.max) {
 			max = params.int('max')
+		}
 
 // List<User> userList = User.findAll()
 		if (offset ?: 0)
@@ -20,13 +22,15 @@ class AdminController {
 	}
 	def toggleActive(Long id) {
 		User user = User.get(id)
-		if (user.isActive)
-		user.isActive=false
-		else
-			user.isActive=true
+		if (user.isActive) {
+			user.isActive = false
+		}
+		else {
+			user.isActive = true
+		}
 
 		user.save(flush:true)
-		flash.message="${user.userName} activeness change"
-		redirect(controller:'admin',action:'index')
+		flash.message = "${user.userName} activeness change"
+		redirect(controller:'admin', action:'index')
 	}
 }

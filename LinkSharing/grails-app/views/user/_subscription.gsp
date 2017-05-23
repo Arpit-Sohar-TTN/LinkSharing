@@ -54,7 +54,7 @@
 				</g:if>
 
 
-				<select id="seriousnessSubs"  class="form-control access pull-right" style="margin-left: 10px;margin-right: 10px; width: 30%">
+				<select id="seriousnessSubs${subscribedTopic.id}"  class="form-control access pull-right" style="margin-left: 10px;margin-right: 10px; width: 30%">
 					<option value="SERIOUS">SERIOUS</option>
 					<option value="VERY_SERIOUS">VERY_SERIOUS</option>
 					<option value="CASUAL">CASUAL</option>

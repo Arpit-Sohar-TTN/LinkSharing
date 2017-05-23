@@ -42,7 +42,7 @@
 							<div class="row"><!--content-->
 								<div class="col-xs-8 col-md-8"><!--searchBox-->
 								<g:hiddenField name="id" value="${topicVO.id}"/>
-								<input type="text" id="topicName" type="text" value="${topicVO.name}"  placeholder="Topic"
+								<input type="text" id="topicName${topicVO.id}" type="text" value="${topicVO.name}"  placeholder="Topic"
 								             style="width: 230px"/>
 								</div><!--./searchBox-->
 								<div class="col-xs-4 col-md-4"><!--button-->
@@ -58,19 +58,20 @@
 						<span class=" glyphicon glyphicon-file envIcon"></span>
 						<span class=" glyphicon glyphicon-trash envIcon"></span>
 
-						<g:select id="seriousness" class="form-control access pull-right" style="margin-left: 10px; width: 30%"
+						<g:select id="seriousness${topicVO.id}" class="form-control access pull-right" style="margin-left: 10px; width: 30%"
 						          name="seriousness" from="${linksharing.Seriousness.getEnumConstants()}"/>
 						%{--<option value="${linksharing.Seriousness.SERIOUS}">SERIOUS</option>
 						<option value="${linksharing.Seriousness.VERY_SERIOUS}">VERY_SERIOUS</option>
 						<option value="${linksharing.Seriousness.CASUAL}">CASUAL</option>--}%
 
 
-						<g:select id="visibility" from="${linksharing.Visibility.getEnumConstants()}"
+						<g:select id="visibility${topicVO.id}" from="${linksharing.Visibility.getEnumConstants()}"
 						          class="form-control access pull-right" style="margin-left: 10px; width: 30%"
 						          name="visibility"/>
 
 					</div>
 					%{--<g:submitButton name="editTopic" value="Save" class="pull-right"/>--}%
+
 				<input type="button" value="Save" class="pull-right" onclick="editTopic(${topicVO.id})" >
 				%{--</g:form>--}%
 			</div>

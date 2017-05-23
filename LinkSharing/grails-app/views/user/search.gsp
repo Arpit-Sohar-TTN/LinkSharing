@@ -3,7 +3,7 @@
 <html lang="en" class="no-js">
 <head>
 	<meta name="layout" content="main">
-	<title>Login Page</title>
+	<title>Search Results</title>
 </head>
 
 <body>

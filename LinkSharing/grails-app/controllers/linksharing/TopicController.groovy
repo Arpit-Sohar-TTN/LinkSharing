@@ -7,50 +7,13 @@ import grails.converters.JSON
 
 class TopicController {
 
-	TopicService topicService = new TopicService()
+	def topicService
 
 
-	def index(String to) {
+			/*def index(String to) {
 		TopicCO topicCO = new TopicCO(topicName: to, visibility: Visibility.PRIVATE)
 		save(topicCO, "SERIOUS")
 		render "Topic index"
-	}
-
-	def showTopic(Long id) {
-
-		Topic topic = Topic.findById(id)
-
-		//List<Resource> resourceList = Resource.findAllByTopic(topic)
-		User user = session.getAttribute('user')
-		if (user) {
-
-			render view: 'topicShow', model: [topic: topic]
-
-		} else {
-			flash.message = "Please Signup First"
-			redirect(controller: 'login', action: 'index')
-		}
-
-
-
-	}
-
-	def save(String topicName, String visibility) {
-		Visibility visibility1 = Visibility.stringtoEnum(visibility)
-
-		User user = session.getAttribute('user')
-		if (user) {
-			Topic topic = new Topic(topicName: topicName, createdBy: user, visibility: visibility1)
-			String seriousness = Constants.DEFAULT_SERIOUSNESS
-			Seriousness seriousness1 = Seriousness.convertIntoEnum(seriousness)
-			if (topicService.topicSave(topic, user, seriousness1)) {
-				flash.message = "Topic Saved Successfully"
-				forward(controller: 'user', action: 'index')
-			} else {
-				flash.error = "Topic Not saved"
-				forward(controller: 'user', action: 'index')
-			}
-		}
 	}
 
 	def showResource(ResourceSearchCO resourceSearchCO) {
@@ -78,21 +41,39 @@ class TopicController {
 
 
 
-	}
+	}*/
+	def save(String topicName, String visibility) {
+		Visibility visibility1 = Visibility.stringtoEnum(visibility)
 
+		User user = session.getAttribute('user')
+		if (user) {
+			Topic topic = new Topic(topicName: topicName, createdBy: user, visibility: visibility1)
+			String seriousness = Constants.DEFAULT_SERIOUSNESS
+			Seriousness seriousness1 = Seriousness.convertIntoEnum(seriousness)
+			if (topicService.topicSave(topic, user, seriousness1)) {
+				flash.message = "Topic Saved Successfully"
+				forward(controller: 'user', action: 'index')
+			} else {
+				flash.error = "Topic Not saved"
+				forward(controller: 'user', action: 'index')
+			}
+		}
+	}
+	def showTopic(Long id) {
+		Topic topic = Topic.findById(id)
+		User user = session.getAttribute('user')
+		if (user) {
+			render view: 'topicShow', model: [topic: topic]
+		} else {
+			flash.message = "Please Signup First"
+			redirect(controller: 'login', action: 'index')
+		}
+	}
 
 	def delete(int id) {
 		Map response = [:]
-		Topic topic = Topic?.load(id)
 		User user = session.getAttribute('user')
-		if ((topic.createdBy.userName == user.userName)) {
-			topic.delete(flush: true)
-			response.success = "${topic.topicName} deleted successfully"
-
-		} else {
-			response.success = "You are not authenticate to delete this topic"
-
-		}
+		response = topicService.deleteTopic(id,user)
 		render response as JSON
 	}
 

@@ -281,6 +281,9 @@ ruleset {
     JdbcStatementReference
 
     // rulesets/junit.xml
+    JavaIoPackageAccess {
+        enabled = false     //Added newly
+    }
     ChainedTest
     CoupledTestCase
     JUnitAssertAlwaysFails

@@ -93,10 +93,10 @@ function toggleIsSubscribe(id) {
     })
 }
 function editTopic(id) {
-    var topicName = $("#topicName").val()
-    var visibility = $("#visibility option:selected").text()
-    var seriousness = $("#seriousness option:selected").text()
-
+    var topicName = $("#topicName"+id).val()
+    var visibility = $("#visibility"+id+" option:selected").text()
+    var seriousness = $("#seriousness"+id+" option:selected").text()
+    console.log(visibility + seriousness)
     var resourceId = id
     $.ajax({
         url:'/user/editTopic',
@@ -117,7 +117,7 @@ function editTopic(id) {
 }
 function editTopicProp(id) {
     var topicId = id
-    var seriousness = $("#seriousnessSubs option:selected").val()
+    var seriousness = $("#seriousnessSubs"+id+" option:selected").val()
     console.log(seriousness)
     $.ajax({
         url:'/user/editTopicProp',

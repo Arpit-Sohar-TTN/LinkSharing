@@ -16,7 +16,7 @@ class ResourceRating {
 	}
 
 	@Override
-	public String toString() {
+	 String toString() {
 		return "ResourceRating{" +
 				"id=" + id +
 				", resource=" + resource +
@@ -24,6 +24,6 @@ class ResourceRating {
 				", score=" + score +
 				", dateCreated=" + dateCreated +
 				", lastUpdated=" + lastUpdated +
-				'}';
+				'}'
 	}
 }
