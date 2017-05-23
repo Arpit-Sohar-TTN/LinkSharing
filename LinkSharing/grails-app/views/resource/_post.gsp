@@ -27,10 +27,10 @@
 					</g:each>
 				</g:if>
 				<g:else>
-					<p style="margin-top: 10px"><b>First one to rate this post</b></p>
+					<p id="firstRateMsg" style="margin-top: 10px"><b>First one to rate this post</b></p>
 				</g:else>
 				<g:if test="${session.user != null && linksharing.ResourceRating.findByUserAndResource(session.user, resource) == null}">
-					<g:form controller="resource" action="ratePost">
+					%{--<g:form controller="resource" action="ratePost">
 						<g:hiddenField name="resourceId" value="${resource.id}"/>
 						<select name="score" id="" style="background-color: #79b94c    ">
 							<option value="1">1</option>
@@ -40,7 +40,18 @@
 							<option value="5">5</option>
 						</select>
 						<g:submitButton name="rate" value="Rate"/>
-					</g:form>
+					</g:form>--}%
+
+						<g:hiddenField id="resourceId" name="resourceId" value="${resource.id}"/>
+						<select id="score" style="background-color: #79b94c    ">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+						<input type="button" value="Rate" id="rate" onclick="ratePost(${resource.id})"/>
+
 				</g:if>
 
 			%{--<span class="glyphicon glyphicon-heart"></span>--}%

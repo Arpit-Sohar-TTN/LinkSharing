@@ -7,6 +7,7 @@ import com.ttn.util.Constants
 import com.ttn.vo.ResourceVO
 import com.ttn.vo.TopicVO
 import com.ttn.vo.UserVO
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -178,44 +179,50 @@ class UserController {
 	}
 
 	def toggleIsSubscribe(Long id) {
+		Map response = [:]
 		Topic topic = Topic.get(id)
 		User user = session.user
 		Subscription subscription = Subscription.findByUserAndTopic(user, topic)
+		println subscription
 		if (subscription == null) {
 			Subscription subscription1 = new Subscription(topic: topic, user: user, seriousness: Constants.DEFAULT_SERIOUSNESS)
-			subscription1.save(flush: true, floatOnErro: true)
-			redirect(controller: 'user', action: 'index')
+			subscription1.validate()
+			subscription1.save(flush: true, failOnError: true)
+//			redirect(controller: 'user', action: 'index')
+			response.success = "Subscribed topic"
 		} else {
 			subscription.delete(flush: true)
-			redirect(controller: 'user', action: 'index')
+			response.success = "Unsubscribed topic "
 
 		}
+		render response as JSON
+
 	}
 
 	def editTopic(TopicCO topicCO, String seriousness) {
 		User user = session.user
-
+		Map response = [:]
 		topicCO.createdBy = user
 		Topic topic = Topic.findByCreatedByAndId(user, topicCO.id)
 		bindData(topic, topicCO)
+		println topicCO
+		println topic
 
 		if (topic.save(flush: true, floatOnError: true)) {
 			Subscription subscription = Subscription.findByUserAndTopic(user, topic)
 			if (subscription) {
 				subscription.seriousness = Seriousness.convertIntoEnum(seriousness)
 				if (subscription.save(flush: true)) {
-					flash.message = "Topic ${topic} edited successfully"
-					redirect(controller: 'user', action: 'index')
+					response.success = "Topic ${topic} edited successfully"
 				} else {
-					flash.error = "Topic edit seriousness is default"
-					redirect(controller: 'user', action: 'index')
+					response.success = "Topic edit seriousness is default"
 				}
 			}
 
 		} else {
-			flash.error = "Topic ${topic} cannot be edit"
-			redirect(controller: 'user', action: 'index')
+			response.success  = "Topic ${topic} cannot be edit"
 		}
+		render response as JSON
 	}
 
 	def search(String q) {
@@ -250,6 +257,25 @@ class UserController {
 		out.write(photo)
 		out.flush()
 		out.close()
+	}
+
+	def editTopicProp(Long topicId,String seriousness) {
+		Map response = [:]
+		User user = session.user
+		Topic topic = Topic.get(topicId)
+		Subscription subscription = Subscription.findByUserAndTopic(user,topic)
+		println subscription
+		if (subscription) {
+			subscription.seriousness = Seriousness.convertIntoEnum(seriousness)
+			if (subscription.save(flush:true,failOnError:true)) {
+				response.success = "${topic} seriousness changed to ${seriousness}"
+			} else {
+				response.success = "Seriousness cannot be altered"
+			}
+		} else {
+			response.success = "Subscription not exist"
+		}
+		render response as JSON
 	}
 
 }

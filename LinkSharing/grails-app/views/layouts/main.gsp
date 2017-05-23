@@ -100,8 +100,10 @@
 	<!-- /.container -->
 </nav>
 <!-- /.navbar -->
+<div  id="msg" style="text-align: center"></div>
+
 <g:if test="${flash.singleError}" style="margin-left: 50px;margin-right: 500px">
-	<div class="alert alert-danger" id="successMessage" style="text-align: center">
+	<div class="alert alert-danger" id="singleErrorMessage" style="text-align: center">
 		<strong>${flash.singleError}</strong>
 	</div>
 </g:if>

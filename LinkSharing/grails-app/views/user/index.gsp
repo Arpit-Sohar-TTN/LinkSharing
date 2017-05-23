@@ -11,7 +11,7 @@
 	<g:render template="/editProfile/id"/>
 	<div class="panel-heading" style="height: 50px;">
 		<h4 class="panel-title pull-left" style="padding-top: 7.5px;">Subscription</h4>
-		<a class="pull-right">view all</a>
+
 
 	</div>
 	<g:render template="subscription"/>

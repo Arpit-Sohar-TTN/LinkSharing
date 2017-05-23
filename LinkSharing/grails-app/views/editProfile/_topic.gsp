@@ -16,7 +16,7 @@
 		<g:if test="${(topicVO.createdBy.userName == session.user.userName)}">
 
 			<div class="panel-body" style="padding: 10px">
-				<g:form controller="user" action="editTopic" name="editTopic">
+				%{--<g:form controller="user" action="editTopic" name="editTopic">--}%
 					<div class="row">
 						<div class="col-md-3 col-xs-12">
 							%{--<g:img dir="assets/images" file="iconProfile.png" class="img-rounded img-responsive center-block profileImage"/>--}%
@@ -42,7 +42,7 @@
 							<div class="row"><!--content-->
 								<div class="col-xs-8 col-md-8"><!--searchBox-->
 								<g:hiddenField name="id" value="${topicVO.id}"/>
-								<g:textField type="text" value="${topicVO.name}" name="topicName" placeholder="Topic"
+								<input type="text" id="topicName" type="text" value="${topicVO.name}"  placeholder="Topic"
 								             style="width: 230px"/>
 								</div><!--./searchBox-->
 								<div class="col-xs-4 col-md-4"><!--button-->
@@ -58,20 +58,21 @@
 						<span class=" glyphicon glyphicon-file envIcon"></span>
 						<span class=" glyphicon glyphicon-trash envIcon"></span>
 
-						<g:select class="form-control access pull-right" style="margin-left: 10px; width: 30%"
+						<g:select id="seriousness" class="form-control access pull-right" style="margin-left: 10px; width: 30%"
 						          name="seriousness" from="${linksharing.Seriousness.getEnumConstants()}"/>
 						%{--<option value="${linksharing.Seriousness.SERIOUS}">SERIOUS</option>
 						<option value="${linksharing.Seriousness.VERY_SERIOUS}">VERY_SERIOUS</option>
 						<option value="${linksharing.Seriousness.CASUAL}">CASUAL</option>--}%
 
 
-						<g:select from="${linksharing.Visibility.getEnumConstants()}"
+						<g:select id="visibility" from="${linksharing.Visibility.getEnumConstants()}"
 						          class="form-control access pull-right" style="margin-left: 10px; width: 30%"
 						          name="visibility"/>
 
 					</div>
-					<g:submitButton name="editTopic" value="Save" class="pull-right"/>
-				</g:form>
+					%{--<g:submitButton name="editTopic" value="Save" class="pull-right"/>--}%
+				<input type="button" value="Save" class="pull-right" onclick="editTopic(${topicVO.id})" >
+				%{--</g:form>--}%
 			</div>
 			<br/>
 		</g:if>

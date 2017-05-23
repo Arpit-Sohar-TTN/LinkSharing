@@ -14,4 +14,16 @@ class ResourceRating {
 		score min: 1, max: 5
 		resource(unique: ['user'])
 	}
+
+	@Override
+	public String toString() {
+		return "ResourceRating{" +
+				"id=" + id +
+				", resource=" + resource +
+				", user=" + user +
+				", score=" + score +
+				", dateCreated=" + dateCreated +
+				", lastUpdated=" + lastUpdated +
+				'}';
+	}
 }

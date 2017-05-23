@@ -3,6 +3,7 @@ package linksharing
 import com.ttn.co.ResourceSearchCO
 import com.ttn.co.TopicCO
 import com.ttn.util.Constants
+import grails.converters.JSON
 
 class TopicController {
 
@@ -81,15 +82,18 @@ class TopicController {
 
 
 	def delete(int id) {
+		Map response = [:]
 		Topic topic = Topic?.load(id)
 		User user = session.getAttribute('user')
 		if ((topic.createdBy.userName == user.userName)) {
 			topic.delete(flush: true)
-			redirect(controller: 'user', action: 'index')
+			response.success = "${topic.topicName} deleted successfully"
+
 		} else {
-			flash.message = "You are not authenticate to delete this topic"
-			render flash.message
+			response.success = "You are not authenticate to delete this topic"
+
 		}
+		render response as JSON
 	}
 
 

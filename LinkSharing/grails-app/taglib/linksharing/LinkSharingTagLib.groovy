@@ -15,7 +15,8 @@ class LinkSharingTagLib {
 				ReadingItem readingItem = ReadingItem.findByUserAndResource(user, resource)
 				if (readingItem) {
 					if (readingItem.isRead == false) {
-						out << "<a href='${createLink(controller: 'readingItem', action: 'toggleIsRead', id: resource.id)}'>Mark as Read</a> "
+//						out << "<a href='${createLink(controller: 'readingItem', action: 'toggleIsRead', id: resource.id)}'>Mark as Read</a> "
+						out << "<a href='javascript:void(0)' onclick='toggleIsRead(${resource.id})'>Mark as Read</a> "
 					}
 				}
 			}
@@ -34,9 +35,12 @@ class LinkSharingTagLib {
 		Topic topic = Topic.get(id)
 		Subscription subscription = Subscription.findByUserAndTopic(user, topic)
 		if (subscription) {
-			out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Unsubscribe</a> "
+//			out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Unsubscribe</a> "
+			out << "<a id='subscribeInfo' onclick='toggleIsSubscribe(${id})'>Unsubscribe</a> "
 		} else {
-			out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Subscribe</a> "
+//			out << "<a href='${createLink(controller: 'user', action: 'toggleIsSubscribe', id: id)}'>Subscribe</a> "
+			out << "<a id='subscribeInfo' onclick='toggleIsSubscribe(${id})'>Subscribe</a> "
+
 		}
 
 	}

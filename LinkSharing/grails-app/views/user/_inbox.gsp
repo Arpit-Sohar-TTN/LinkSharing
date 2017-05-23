@@ -15,7 +15,7 @@
         <g:if test="${resourceVO.isRead == false}">
 
         %{--${resourceVO.class.getMethod()}--}%
-            <div class="panel-body paginate">
+            <div id="inboxMsg${resourceVO.id}" class="panel-body paginate">
                 <div class="col-md-2 col-xs-12">
                     %{--<img class="img-rounded img-responsive center-block profileImage"  src="../assets/iconProfile.png">--}%
                     <ls1:userImage userId="${resourceVO.createdBy.id}"/>
@@ -31,6 +31,7 @@
                                 <span class="fa fa-facebook"></span>
                                 <span class="fa fa-twitter" style="padding-left: 10px"></span>
                                 <span class="fa fa-google-plus" style="padding-left: 10px"></span>
+                                <!--</a>
                                 <!--</a>
                                     <a class="btn btn-social-icon btn-twitter">
                                         <span class="fa fa-twitter"></span>

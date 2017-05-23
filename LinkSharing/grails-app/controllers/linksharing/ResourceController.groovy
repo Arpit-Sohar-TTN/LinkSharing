@@ -45,7 +45,7 @@ class ResourceController {
         if (linkResource.save(flush: true)) {
             flash.message = "Link Resource Saved"
         } else {
-            flash.error = "Fail to save resource"
+            flash.singleError = "Fail to save resource"
         }
         redirect(controller: 'user', action: 'index')
     }
@@ -82,19 +82,20 @@ class ResourceController {
 
     def ratePost(int resourceId, int score) {
         User user = session.user
-
         Resource resource = Resource.get(resourceId)
         ResourceRating resourceRating = new ResourceRating(user: user, resource: resource, score: score)
-
-        if (resourceRating.save(flush: true, failOnErro: true)) {
+       /* if (resourceRating.save(flush: true, failOnError: true)) {
             flash.message = "Resource Rated succcessfully"
+            println "Resource Rated succcessfully"
             forward action: "showPost", params: [id: "${resource.id}"]
 
         } else {
             flash.loginError = "Fail to rate resource try again after some time"
+            println "Fail to rate resource try again after some time"
             forward action: "showPost", params: [id: "${resource.id}"]
 
-        }
+        }*/
+        resourceRating.save(flush:true, failOnError:true)
 
     }
 
