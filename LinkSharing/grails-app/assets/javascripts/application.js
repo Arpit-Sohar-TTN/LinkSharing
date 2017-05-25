@@ -23,7 +23,6 @@ if (typeof jQuery !== 'undefined') {
         });
     })(jQuery);
 }
-
 function ratePost(id) {
     var resourceId = id
 var score = $("#score option:selected").text()
@@ -156,3 +155,50 @@ function deleteTopic(id) {
         }
     })
 }
+
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+   var userCO = {
+       firstName: profile.getName().split(" ")[0],
+       lastName: profile.getName().split(" ")[1],
+       email: profile.getEmail(),
+       userName: profile.getName().split(" ")[0],
+       password: "123456"
+   }
+   console.log(userCO)
+    $.ajax({
+        url:'/login/loginWithGoogle',
+        type: 'POST',
+        data:userCO,
+        success:function () {
+            $("#msg").html("Wish to continue to application <a href='/login/index'>Home</a> or not" +
+                " <a href='javascript: signOut()'>Logout</a>")
+                console.log(34)
+            $("#msg").addClass("alert alert-info")
+
+            // location.href = "http://localhost:8080/user/index"
+        },
+        error: function () {
+            $("#msg").html("Error in response")
+            $("#msg").addClass("alert alert-info")
+
+        }
+    })
+}
+function signOut() {
+    console.log(2)
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+    $('#msg').html("")
+    $('#msg').removeClass("alert alert-info")
+}
+
+
+

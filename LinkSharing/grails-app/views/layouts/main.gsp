@@ -3,28 +3,30 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="google-signin-client_id" content="514518884345-vcfhph0e827u43vap57hjh1pr1ipfpt1.apps.googleusercontent.com">
 	<link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'icon.png')}" type="image/x-icon"/>
 	<g:layoutHead/>
-	<g:javascript library="application"/>
 	<title>
 		<g:layoutTitle default="Grails"/>
 	</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
 	<asset:stylesheet src="application.css"/>
 	<asset:stylesheet src="css/font-awesome.min.css"/>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer ></script>
+	<g:javascript library="application"/>
 	<g:layoutHead/>
+
+
 </head>
 
 <body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-default " style="background-color:    #4CAF50    ;margin-bottom: 20px ">
+	%{--<button onclick="signOut()">signout</button>--}%
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -55,7 +57,8 @@
 						</g:if>
 						<li><g:link controller="user" action="editProfile">Profile</g:link></li>
 						<li role="separator" class="divider"></li>
-						<li><g:link controller="login" action="logout">Logout</g:link></li>
+						%{--<li><g:link controller="login" action="logout">Logout</g:link></li>--}%
+						<li><a href="/login/logout" onclick="signOut()">Logout</a></li>
 					</ul>
 				</li>
 			</g:if>
@@ -72,7 +75,6 @@
 				%{--<button class="close-icon redfamily" type="reset"></button>--}%
 				<label class="glyphicon glyphicon-search redfamily searchIcon" rel="tooltip" title="Search"></label>
 			%{--<input type="submit" value="search"/>--}%
-
 
 				<g:if test="${session.getAttribute('user')}">
 
@@ -126,13 +128,12 @@
 
 <div class="footer" role="contentinfo"
      style="height: 50px;color: black;background-color:  #4CAF50 !important;position: relative;bottom:0;left:0;right:0;padding-top: 10px">
-	%{--&copy;TO The New
-	</div>--}%
 	<g:render template="/user/modalSendInvitation"></g:render>
 	<g:render template="/user/modalShareDocuments"></g:render>
 	<g:render template="/user/modalShareLink"></g:render>
 	<g:render template="/user/modalCreateTopic"></g:render>
 	<g:render template="/user/modalSendEmail"></g:render>
+</div>
 	<asset:javascript src="application.js"/>
 
 </body>

@@ -14,6 +14,7 @@ class LoginController {
         List<ResourceVO> topPosts = Resource.topPost()
         List<ResourceVO> recentShares = Resource.recentShares()
         if (session.getAttribute('user')) {
+            println session.user
             redirect(controller: 'user', action: 'index')
         } else {
             render view: 'index', model: [topPosts: topPosts, recentShares: recentShares]
@@ -45,7 +46,8 @@ class LoginController {
 
     def logout() {
         session.invalidate()
-        forward(controller: 'Login', action: 'index')
+        println "logout"
+        redirect(controller: 'login', action: 'index')
     }
 
     def register(UserCO userCO) {
@@ -67,6 +69,21 @@ class LoginController {
             }
         }
 
+    }
+
+
+    def loginWithGoogle(UserCO userCO) {
+        println userCO
+        User user = User.findByUserName(userCO.userName)
+        if (user) {
+            println user
+            session.setAttribute('user', user)
+        } else {
+            User user1 = new User()
+            bindData(user1, userCO)
+            user1.save(flush: true, failOnError: true)
+        }
+        return true
     }
 
 }

@@ -5,9 +5,9 @@
 	<meta name="layout" content="main">
 	<title>Login Page</title>
     <script>
-//    $(document).ready(function () {
-////        signOut()
-//    })
+    $(document).ready(function () {
+//        signOut()
+    })
 </script>
 </head>
 

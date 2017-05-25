@@ -41,5 +41,7 @@
 		</g:form>--}%
 		<input value="Forget Password" type="submit" id="button2" class="btn btn-success btn-block" data-toggle="modal"
 		       data-target="#sendMail"/>
+		<div class="g-signin2" data-onsuccess="onSignIn" ></div>
+
 	</div>
 </div>

@@ -55,6 +55,7 @@ dependencies {
     compile 'org.grails.plugins:remote-pagination:0.5.0'
     runtime 'org.grails.plugins:ajax-tags:1.0.0.RC1'
     compile "org.grails.plugins:scaffolding"
+
 }
 
 bootRun {
